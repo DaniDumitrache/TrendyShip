@@ -9,40 +9,69 @@
                         <h4 class="title_2">Leave us a message</h4>
                         <p class="mb-4 text_md">Use the form below to get in touch with the sales team</p>
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="single_billing_inp">
-                                    <label for="first_name">First Name <span>*</span></label>
-                                    <input type="text" id="first_name">
+                            <form action="/ContactSent" method="POST">
+                                @csrf
+                                <div class="col-lg-6">
+                                    <div class="single_billing_inp">
+                                        <label for="first_name">First Name <span>*</span></label>
+                                        <input class="@error('FirstName') is-invalid @enderror" type="text"
+                                            name="FirstName">
+                                        @error('FirstName')
+                                            <span class="invalid-feedback">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="single_billing_inp">
-                                    <label for="last_name">Last Name <span>*</span></label>
-                                    <input type="text" id="last_name">
+                                <div class="col-lg-6">
+                                    <div class="single_billing_inp">
+                                        <label for="last_name">Last Name <span>*</span></label>
+                                        <input class="@error('LastName') is-invalid @enderror" type="text"
+                                            name="LastName">
+                                        @error('LastName')
+                                            <span class="invalid-feedback">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="single_billing_inp">
-                                    <label for="email_addr">Email Address <span>*</span></label>
-                                    <input type="text" id="email_addr">
+                                <div class="col-12">
+                                    <div class="single_billing_inp">
+                                        <label for="email_addr">Adresa De Email<span>*</span></label>
+                                        <input class="@error('Email') is-invalid @enderror" type="text" name="Email">
+                                        @error('Email')
+                                            <span class="invalid-feedback">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="single_billing_inp">
-                                    <label for="company_name">Subject</label>
-                                    <input type="text" id="company_name">
+                                <div class="col-12">
+                                    <div class="single_billing_inp">
+                                        <label for="company_name">subiect</label>
+                                        <input class="@error('Subject') is-invalid @enderror" type="text" name="Subject">
+                                        @error('Subject')
+                                            <span class="invalid-feedback">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="single_billing_inp">
-                                    <label for="county_region">Your message <span>*</span></label>
-                                    <textarea type="text" id="county_region"></textarea>
+                                <div class="col-12">
+                                    <div class="single_billing_inp">
+                                        <label for="county_region">messajul tau <span>*</span></label>
+                                        <textarea class="@error('message') is-invalid @enderror" type="text" name="message"></textarea>
+                                        @error('message')
+                                            <span class="invalid-feedback">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12 mt-4">
-                                <button type="submit" class="default_btn xs_btn rounded px-4">send message</button>
-                            </div>
-
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="default_btn xs_btn rounded px-4">send message</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

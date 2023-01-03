@@ -17,10 +17,17 @@
                         <div class="col-12 col-md-6 col-lg-12">
                             <div class="footer_newslet">
                                 <h4>Newsletter</h4>
-                                <form class="footernews_form">
-                                    <input type="text" placeholder="Your email address">
+                                <form action="NewsLetter" method="POST" class="footernews_form">
+                                    @csrf
+                                    <input type="text" class="" name="NewsLetterEmail"
+                                        placeholder="Your email address">
                                     <button type="submit" class="default_btn">Subscribe</button>
                                 </form>
+                                @error('NewsLetterEmail')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -29,27 +36,42 @@
                     <div class="row">
                         <div class="col-6">
                             <div class="footer_menu">
-                                <h4 class="footer_title">My Account</h4>
-                                <a href="account-order-history.html">Orders</a>
-                                <a href="wish-list.html">Wishlist</a>
-                                <a href="track-order.html">Track Order</a>
-                                <a href="#">Manage Account</a>
-                                <a href="return-order.html">Return Order</a>
+                                <h4 class="footer_title">Servicii pentru clienti</h4>
+                                <a href="account-order-history.html">Garantii si service</a>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="footer_menu">
-                                <h4 class="footer_title">Information</h4>
-                                <a href="about-us.html">About Us</a>
-                                <a href="return-policy.html">Return Policy</a>
-                                <a href="terms-condition.html">Terms & condition</a>
-                                <a href="privacy-policy.html">Privacy Policy</a>
-                                <a href="faq.html">FAQ</a>
+                                <h4 class="footer_title">Comenzi si livrare</h4>
+                                <a href="{{ route('account') }}">Contul meu</a>
+                                <a href="">Livrarea comenzilor</a>
+                                {{-- <a href="terms-condition.html">Vreau sa vand</a> --}}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-4 mb-3 mb-md-0">
+                    <div class="row">
+
+                        <div class="col-6">
+                            <div class="footer_menu">
+                                <h4 class="footer_title">Suport clienti</h4>
+                                <a href="">Formular returnare produs</a>
+                                <a href="{{ route('contact') }}">Contact</a>
+                                <a href="">ANPC</a>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="footer_menu">
+                                <h4 class="footer_title">{{ config('app.name') }}</h4>
+                                <a href="">Despre {{ config('app.name') }}</a>
+                                <a href="">Termene si conditii</a>
+                                <a href="">ANPC</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="col-lg-4">
                     <div class="footer_download">
                         <div class="row">
                             <div class="col-lg-6 col-lg-12">
@@ -80,7 +102,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </footer>
@@ -90,7 +112,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <p class="copyright_text">© RAFCART - All Rights Reserved</p>
+                    <p class="copyright_text">© {{ config('app.name') }} - All Rights Reserved</p>
                 </div>
             </div>
         </div>
