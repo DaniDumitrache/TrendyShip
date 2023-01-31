@@ -6,7 +6,7 @@
             <div class="row">
                 @include('layouts.headerAccount')
                 <!-- account content -->
-                <div class="col-lg-12">
+                <div class="col-lg-9">
                     <div class="acprof_info_wrap shadow_sm">
                         <h4 class="text_xl mb-3">Gestionati Adresa</h4>
                         <form action="ManageAdress" method="POST">

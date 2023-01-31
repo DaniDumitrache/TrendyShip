@@ -17,17 +17,57 @@
                         </div>
                         <div class="acprof_wrap shadow_sm">
                             <div class="acprof_links">
-                                <a href="account.html" class="active">
+                                <a href="{{ route('account') }}" class="active">
                                     <h4 class="acprof_link_title">
-                                        <i class="lar la-id-card"></i>
-                                        Manage My Account
+                                        <i class="bi bi-house-door"></i>
+                                        Contul meu
                                     </h4>
                                 </a>
-                                <a href="account-profile-info.html">Comenzile mele</a>
-                                <a href="account-manage-address.html">Modifica Adresa</a>
-                                <a href="account-change-password.html">Modifica parola</a>
+                                <a href="{{ route('order') }}">Comenzile mele</a>
+                                <a href="">{{ config('app.name') }} <span class="text-color"
+                                        style="font-size: 18px">Premium</span></a>
+                                <a href="{{ route('favorite') }}">Favorite</a>
+                                <a href="">Review-urile mele</a>
+                                <a href="{{ route('ManageAdress') }}">Date personale</a>
+                                <a href="">Setări siguranță</a>
+                                <a href="">Abonările mele</a>
                             </div>
-                            <div class="acprof_links">
+                            @if ($admin)
+                            @empty(!$GroupPermission)
+                                <div class="acprof_links">
+                                    <a class="active">
+                                        <h4 class="acprof_link_title">
+                                            <i class="bi bi-award"></i>
+                                            (admin)
+                                        </h4>
+                                    </a>
+                                    @foreach (json_decode($GroupPermission->permission, true) as $permission)
+                                        @if (isset($permission['dashboard'][0]) && $permission['dashboard'][0] == 'true')
+                                            <a href="">dashboard</a>
+                                        @endif
+                                        @if (isset($permission['customers'][0]) && $permission['customers'][0] == 'true')
+                                            <a href="{{ route('admin/customers') }}">clientii</a>
+                                        @endif
+                                        @if (isset($permission['users'][0]) && $permission['users'][0] == 'true')
+                                            <a href="{{ route('admin/users') }}">utilizatori</a>
+                                        @endif
+                                        @if (isset($permission['group'][0]) && $permission['group'][0] == 'true')
+                                            <a href="{{ route('admin/group') }}">Grupuri</a>
+                                        @endif
+                                        @if (isset($permission['Category'][0]) && $permission['Category'][0] == 'true')
+                                            <a href="{{ route('admin/categories') }}">categorii</a>
+                                        @endif
+                                        @if (isset($permission['products'][0]) && $permission['products'][0] == 'true')
+                                            <a href="{{ route('admin/products') }}">Produse</a>
+                                        @endif
+                                        @if (isset($permission['settings'][0]) && $permission['settings'][0] == 'true')
+                                            <a href="{{ route('settings/ManageSite') }}">setari</a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @endempty
+                        @endif
+                        {{-- <div class="acprof_links">
                                 <a href="account-order-history.html">
                                     <h4 class="acprof_link_title">
                                         <i class="las la-gift"></i>
@@ -54,8 +94,8 @@
                                         My Wishlist
                                     </h4>
                                 </a>
-                            </div>
-                            <form action="{{ route('logout') }}">
+                            </div> --}}
+                        {{-- <form action="{{ route('logout') }}">
                                 <div class="acprof_links border-0">
                                     <h4 class="acprof_link_title">
                                         <button type="submit"
@@ -64,7 +104,7 @@
                                             Log Out</button>
                                     </h4>
                                 </div>
-                            </form>
-                        </div>
+                            </form> --}}
                     </div>
                 </div>
+            </div>

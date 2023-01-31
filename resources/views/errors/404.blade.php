@@ -3,7 +3,7 @@
 @section('content')
     <!-- 404 page -->
     <div class="section_padding_b">
-        <div class="container">
+        <div class="container" style="height: 50vh;">
             <div class="row justify-content-center">
                 <div class="col-xl-7 col-lg-9">
                     <div class="page_nfwrap">

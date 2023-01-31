@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\productsTable;
 use App\Models\Categoryes;
-use Hamcrest\Type\IsString;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\website_configController;
 
 class productsController extends Controller
 {
     public $order;
-    public $DeliveryCost = 20;
-    //
+
+    public function __construct()
+    {
+        $website_config = new website_configController;
+        $website_config->website_config();
+
+        return $this->DeliveryCost = $website_config->website_config->delivery_fee; // Ron
+    }
     public function GetProduct()
     {
         $this->GetCategoryes(5);
@@ -127,21 +133,33 @@ class productsController extends Controller
     }
 
     // Cart
-    public function AddToCart(Request $req, $id)
+    public function addToCart($productId)
     {
-        $products = productsTable::where('id', ['id' => $id])->get();
-        $items = Session::get('cart', []);
-
-
-        if (!isset($items[array_search($id, $items)])) {
-            if (count($products) == 1) {
-                session()->push('cart', $id);
-            }
+        // Check if the product exists in the database
+        $product = productsTable::find($productId);
+        if (!$product) {
+            // Return an error if the product doesn't exist
+            return response()->json(['error' => 'Product not found'], 404);
         }
 
-        return back();
-    }
+        // Check if the product is already in the cart
+        $cart = session()->get('cart', []);
+        if (isset($cart[$productId])) {
+            // If the product is already in the cart, increment the quantity
+            $cart[$productId]['quantity']++;
+        } else {
+            // If the product is not in the cart, add it with a quantity of 1
+            $cart[$productId] = [
+                'id' => $productId,
+                'quantity' => 1
+            ];
+        }
 
+        // Save the updated cart to the session
+        session()->put('cart', $cart);
+
+        return response()->json(['success' => 'Product added to cart']);
+    }
     public function RemoveFromCart(Request $req, $id)
     {
         $items = Session::get('cart', []);
@@ -157,24 +175,26 @@ class productsController extends Controller
 
     public function GetCartData()
     {
-        if (empty(session("cart"))) {
-            $id = ["0"];
-        } else {
-            $id = session('cart');
+
+        // Get the cart from the session
+        $cart = session()->get('cart', []);
+
+        // Retrieve the products from the database
+        $CartProducts = productsTable::whereIn('id', array_column($cart, 'id'))->get();
+
+        $total = 0;
+        foreach ($CartProducts as $product) {
+            // find the quantity from the session cart
+            $product->quantity = array_column($cart, 'quantity', 'id')[$product->id];
+            $total += $product->price * $product->quantity - $product->price * $product->discount / 100;
+        }
+        $subtotal = $total;
+
+        if ($total >= 200) {
+            $total -= $this->DeliveryCost;
         }
 
-        $CartProducts = productsTable::whereIn('id', [$id])->get();
-
-        $total = DB::table('products')->select(DB::raw('SUM(`Price` - `Price` * Discount / 100)'))->whereIn('id', [$id])->where('stock', '>=', '1')->get();
-
-        foreach ($total as $Total) {
-            foreach ($Total as $data) {
-            }
-        }
-
-        if ($data >= 200) {
-            $Total = $data + $this->DeliveryCost;
-        }
+        $total = $total + $this->DeliveryCost;
 
         if (session('cupon')) {
             $cupon = DB::table('coupons')->where('coupon', ['coupon' => session('cupon')])->get();
@@ -182,16 +202,22 @@ class productsController extends Controller
             foreach ($cupon as $cuponData) {
             }
 
-            $Total = $data - $data * ($cuponData->Discount / 100);
+            if (empty($cuponData)) {
+                session()->put("cupon", null);
+                return redirect(Request::url());
+            }
+
+            $total = $total - $total * ($cuponData->Discount / 100);
         } else {
-            $Total = $data;
+            $total = $total;
         }
 
-        $ProductCost = $data;
+
+        $ProductCost = $total;
 
         $order = [
-            'Total' => intval($Total),
-            'ProductCost' => intval($ProductCost),
+            'Total' => intval($total),
+            'ProductCost' => intval($subtotal),
             'DeliveryCost' => intval($this->DeliveryCost),
         ];
 
@@ -207,7 +233,9 @@ class productsController extends Controller
     public function cart(Request $req)
     {
         $this->GetCartData();
-        return view("shopping-cart")->with(["CartProducts" => $this->CartData["CartProducts"], "OrderData" => $this->CartData["order"], "Cupon" => $this->CartData['Cupon']]);
+        // return $this->CartData;
+        return view("shopping-cart")->with(["CartProducts" => $this->CartData["CartProducts"], "OrderData" => $this->CartData["order"], "Cupon" => $this->CartData['Cupon']]);      // // $cart = session()->get('cart', []);
+        // return $cart;
     }
 
     // Checkout

@@ -19,6 +19,19 @@ return new class extends Migration
             $table->longText("config");
             $table->timestamps();
         });
+
+        /*
+        This will create a table called newsletters with the columns id, email, status and
+        created_at and updated_at . The status column will be used to check if a
+        email is subscribed or not
+        */
+
+        // Schema::create('newsletters', function (Blueprint $table) {
+        // $table->id();
+        // $table->string('email');
+        // $table->boolean('status')->default(1);
+        // $table->timestamps();
+        // });
     }
 
     /**
@@ -28,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('NewsLetter');
     }
 };

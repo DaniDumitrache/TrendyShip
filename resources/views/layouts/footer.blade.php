@@ -17,7 +17,7 @@
                         <div class="col-12 col-md-6 col-lg-12">
                             <div class="footer_newslet">
                                 <h4>Newsletter</h4>
-                                <form action="NewsLetter" method="POST" class="footernews_form">
+                                <form action="{{ route('NewsLetter') }}" method="POST" class="footernews_form">
                                     @csrf
                                     <input type="text" class="" name="NewsLetterEmail"
                                         placeholder="Your email address">

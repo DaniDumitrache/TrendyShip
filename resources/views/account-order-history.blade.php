@@ -3,11 +3,17 @@
     <div class="my_account_wrap section_padding_b">
         <div class="container">
             <div class="row">
-                @include("layouts.headerAccount")
+                @include('layouts.headerAccount')
                 <!-- account content -->
                 <div class="col-lg-9">
                     <div class="acorder_wrapper">
+                        @php
+                            $i = 0;
+                        @endphp
                         @foreach ($Orders as $Order)
+                            @php
+                                $i++;
+                            @endphp
                             <div class="single_prof_recorder mt-0 mb-4 shadow_sm">
                                 <div class="prorder_img">
                                     <img loading="lazy" src="assets/images/tv.png" alt="product">
@@ -39,9 +45,16 @@
                                 </div>
                             </div>
                         @endforeach
+                        @if ($i == 0)
+                            <div class="alert alert-danger" role="alert">
+                                Nu aveti nicio comanda plasata, puteti plasa una <a
+                                    href="{{ route('cart') }}">aici</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 @endsection

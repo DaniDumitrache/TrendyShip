@@ -29,7 +29,7 @@
 
             </div>
             <div class="product_adcar">
-                <a href="/AddToCart/{{ $product->id }}" style="color: #fff;" class="default_btn">adauga in
+                <a href="{{ route('AddToCart', $product->id) }}" style="color: #fff;" class="default_btn">adauga in
                     cos</a>
             </div>
         </div>
