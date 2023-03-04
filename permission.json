@@ -1,0 +1,6 @@
+{
+  "permission": {
+    "users": [true],
+    "products": [true]
+  }
+}

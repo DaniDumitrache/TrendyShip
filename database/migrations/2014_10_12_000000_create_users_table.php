@@ -17,11 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string("Phone")->nullable();
-            $table->string("County")->nullable();
-            $table->string("Local")->nullable();
-            $table->longText("adress")->nullable();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->longText("token")->nullable();
             $table->dateTime("remember_token_expire")->nullable();

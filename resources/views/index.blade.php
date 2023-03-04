@@ -2,85 +2,36 @@
 
     @section('content')
         <!-- hero area -->
-        <div class="container-lg home_2_hero_wrp">
-            <div class="home_2_hero">
-                <div class="container">
-                    <div class="hero_slider_active">
-                        <div class="single_hero_slider bg-3">
-                            <div class="container">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-6 col-sm-7">
-                                        <div class="hero_content text-center text-sm-start">
-                                            <p>Get up to 50% off Today only</p>
-                                            <h1>iPhone 11 Pro Max </h1>
-                                            <div class="price">
-                                                <span class="org_price">0 RON</span>
-                                                <span class="prev_price">$550.45</span>
-                                            </div>
-                                            <div class="hero_btn">
-                                                <a class="default_btn rounded" href="shop-grid.html">Shop Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-sm-5 d-none d-sm-block">
-                                        <div class="hero_img">
-                                            <img loading="lazy" src="assets/images/iphone.png" alt="phone">
-                                        </div>
+        <div class="banner_slider">
+            @php $i = 0; @endphp
+            @foreach (json_decode($website_config->homepage_slider, true)['sliders'] as $slider)
+                <div id="banner-{{ $i }}" class="hero_area bg_2" {{-- style="background-image: url('assets/images/banner/banner-1.jpg')" --}}>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="hero_content">
+                                    <h1>{{ $slider['title'] }}</h1>
+                                    <p>{{ $slider['description'] }}</p>
+                                    <div class="hero_btn">
+                                        <a class="default_btn rounded" href="{{ $slider['url'] }}">Shop
+                                            Now</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="single_hero_slider bg-1">
-                            <div class="container">
-                                <div class="row align-items-center">
-                                    <div class="col-sm-6">
-                                        <div class="hero_content text-center text-sm-start">
-                                            <p>Get up to 50% off Today only</p>
-                                            <h1>iPhone 12 Pro Max </h1>
-                                            <div class="price">
-                                                <span class="org_price">$450.00</span>
-                                                <span class="prev_price">$550.45</span>
-                                            </div>
-                                            <div class="hero_btn">
-                                                <a class="default_btn rounded" href="shop-grid.html">Shop Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 d-none d-sm-block">
-                                        <div class="hero_img">
-                                            <img loading="lazy" src="assets/images/iphone-12.png" alt="phone">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single_hero_slider bg-2">
-                            <div class="container">
-                                <div class="row align-items-center">
-                                    <div class="col-sm-6">
-                                        <div class="hero_content text-center text-sm-start">
-                                            <p>Get up to 50% off Today only</p>
-                                            <h1>Apple iPhone XR</h1>
-                                            <div class="price">
-                                                <span class="org_price">$450.00</span>
-                                                <span class="prev_price">$550.45</span>
-                                            </div>
-                                            <div class="hero_btn">
-                                                <a class="default_btn rounded" href="shop-grid.html">Shop Now</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 d-none d-sm-block">
-                                        <div class="hero_img">
-                                            <img loading="lazy" src="assets/images/iphone-xr.png" alt="phone">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <script>
+                            $(document).ready(function() {
+                                setInterval(() => {
+                                    $('#slick-slide0{{ $i }}').css('background-image',
+                                        `url('{{ asset('assets/images/banner/') . '/' . $slider['banner'] }}`
+                                    );
+                                }, 1000);
+                            })
+                        </script>
                     </div>
                 </div>
-            </div>
+                @php $i++ @endphp
+            @endforeach
         </div>
 
         <!-- features area -->
@@ -429,7 +380,43 @@
         </div>
     </div>
 </div>
+{{-- <section class="download_wrap section_padding_b">
+    <div class="container" bis_skin_checked="1">
+        <div class="download_bg" bis_skin_checked="1">
+            <div class="row" bis_skin_checked="1">
+                <div class="col-lg-6" bis_skin_checked="1">
+                    <div class="download_left" bis_skin_checked="1">
+                        <img loading="lazy" src="assets/images/mobile-view.png" class="w-100">
+                    </div>
+                </div>
+                <div class="col-lg-5 px-5 px-lg-0" bis_skin_checked="1">
+                    <div class="download_cont" bis_skin_checked="1">
+                        <h2 class="title_2 text-capitalize mb-3">Download RAFCART App Now!</h2>
+                        <p class="mb-4">Shopping fastly and easily more with our app. Get a link to <br class="d-none d-xl-block"> download
+                            the app on your
+                            phone</p>
+                        <form action="#" class="subscribe_form">
+                            <input type="text" placeholder="Email Address">
+                            <button type="submit">Subscribe</button>
+                        </form>
+                        <div class="download_links" bis_skin_checked="1">
+                            <a href="#" class="me-3">
+                                <img loading="lazy" src="assets/images/download/download-1.png" alt="download">
+                            </a>
+                            <a href="#">
+                                <img loading="lazy" src="assets/images/download/download-2.png" alt="download">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> --}}
 <script src="{{ asset('assets/js/slick.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.nice-select.min.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
+<script>
+    $('.breadcrumbs').remove();
+</script>
 @endsection

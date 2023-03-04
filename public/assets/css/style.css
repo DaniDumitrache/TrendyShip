@@ -489,7 +489,7 @@ nav {
     text-decoration: none;
     color: #2b2d42;
     padding-left: 25px;
-    /* border-bottom: 1px dotted #C8C8CE; */
+    border-bottom: 1px dotted #C8C8CE;
     cursor: pointer;
     -webkit-transition: .3s;
     -o-transition: .3s;
@@ -3318,7 +3318,8 @@ span.sidebarclose {
 .sna_img {
     position: relative;
     background-color: #f3f3f3;
-    padding: 30px 20px;
+    padding: 30px 5px;
+    /* padding: 30px 20px; */
     border-radius: 5px 5px 0 0;
 }
 
@@ -3331,7 +3332,7 @@ span.sidebarclose {
 
 .sna_content {
     padding: 20px 20px;
-    height: 125px;
+    /* height: 125px; */
     overflow: hidden;
     position: relative;
 }

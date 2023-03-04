@@ -14,7 +14,7 @@ class ResetPasswordController extends Controller
     {
         $this->CheckChangeLink($email, $token);
 
-        return view('ResetPassword')->with(["Verification" => $this->CheckTokenAndEmail, "token" => $token, "email" => $email]);
+        return view('auth.ResetPassword')->with(["Verification" => $this->CheckTokenAndEmail, "token" => $token, "email" => $email]);
     }
 
     public function ValidateResetPassword(Request $req)

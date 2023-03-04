@@ -36,7 +36,7 @@ class ManageAdressController extends Controller
 
     public function index()
     {
-        return view("account-manage-address");
+        return view("account.manage-address");
     }
 
 

@@ -44,277 +44,222 @@
 <nav class="home-2">
     <div class="container">
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index-2.html" class="mobile_logo d-block d-lg-none">
+            <a href="/" class="mobile_logo d-block d-lg-none">
                 <img loading="lazy" src="assets/images/svg/logo-white.svg" alt="logo">
             </a>
-            <div class="all_category d-none d-lg-block">
+            <div class="all_category otherpage d-none d-lg-block">
                 <div class="bars text-white d-flex align-items-center justify-content-center">
                     <span class="icon">
                         <i class="las la-bars"></i>
                     </span>
-                    <span class="icon_text">All categories</span>
+                    <span class="icon_text"> Produse</span>
                 </div>
-                {{-- <div class="sub_categories active">
-                    <h5 class="d-block position-relative d-lg-none subcats_title">
-                        All categories
-                    </h5>
-                    <a href="#" class="singlecats">
-                        <span class="img_wrp">
+                <div class="sub_categories_wrp">
+                    <div class="sub_categories">
+                        <h5 class="d-block position-relative d-lg-none subcats_title">
+                            All categories
+                        </h5>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="las la-shoe-prints"></i>
+                            </span>
+                            <span class="txt">Shoes</span>
+                        </a>
 
-                            <i class="bi bi-laptop"></i>
-                        </span>
-                        <span class="txt">Laptop</span>
-                    </a>
-
-                    <div class="singlecats withsub">
-                        <span class="img_wrp">
-                            <i class="bi bi-phone"></i>
-                        </span>
-                        <span class="txt">Mobile</span>
-                        {{-- <span class="wsicon"><i class="las la-angle-right"></i></span>
-                        <div class="mega_menu">
-                            <div class="single_mega_menu">
-                                <div class="mega_menu_wrap">
-                                    <h4>Hot sale</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Hoodies $ Sweatshirts</a>
-                                        <a href="#">T-Shirt</a>
-                                        <a href="#">Men’s Sets</a>
-                                        <a href="#">Jacket</a>
-                                        <a href="#">Shoes</a>
+                        <div class="singlecats withsub">
+                            <span class="img_wrp">
+                                <i class="las la-male"></i>
+                            </span>
+                            <span class="txt">Men</span>
+                            <span class="wsicon"><i class="las la-angle-right"></i></span>
+                            <div class="mega_menu">
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Hot sale</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Hoodies $ Sweatshirts</a>
+                                            <a href="#">T-Shirt</a>
+                                            <a href="#">Men’s Sets</a>
+                                            <a href="#">Jacket</a>
+                                            <a href="#">Shoes</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Bottoms</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Casual Pants</a>
+                                            <a href="#">Men’s Sleep &amp; Lounge</a>
+                                            <a href="#">Jeans</a>
+                                            <a href="#">Shorts</a>
+                                            <a href="#">Towel</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="mega_menu_wrap">
-                                    <h4>Bottoms</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Casual Pants</a>
-                                        <a href="#">Men’s Sleep &amp; Lounge</a>
-                                        <a href="#">Jeans</a>
-                                        <a href="#">Shorts</a>
-                                        <a href="#">Towel</a>
+
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Outerwear $ Jackets</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Jacket</a>
+                                            <a href="#">Sweaters</a>
+                                            <a href="#">Casual Faux Leather</a>
+                                            <a href="#">Parks</a>
+                                            <a href="#">Jeans</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Underwear &amp; Loun</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Boxes</a>
+                                            <a href="#">Berifs</a>
+                                            <a href="#">Long Johns</a>
+                                            <a href="#">Men’s Sleep &amp; Lounge</a>
+                                            <a href="#">Parks</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Accessories</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Scarves</a>
+                                            <a href="#">Skullies &amp; Beanies</a>
+                                            <a href="#">Casual Faux Leather</a>
+                                            <a href="#">Prescription Glasses</a>
+                                            <a href="#">Belt</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Novelty &amp; Special</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Cosplay Costumes</a>
+                                            <a href="#">Stage &amp; Dance Wear</a>
+                                            <a href="#">Exotic Apparel</a>
+                                            <a href="#">Scarves</a>
+                                            <a href="#">Men’s Sets</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="las la-female"></i>
+                            </span>
+                            <span class="txt">Women</span>
+                        </a>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="las la-plug"></i>
+                            </span>
+                            <span class="txt">Electronisc</span>
+                        </a>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="las la-headphones"></i>
+                            </span>
+                            <span class="txt">Headphones</span>
+                        </a>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="icon-watch"></i>
+                            </span>
+                            <span class="txt">Watches</span>
+                        </a>
+                        <div class="singlecats withsub">
+                            <span class="img_wrp">
+                                <i class="las la-desktop"></i>
+                            </span>
+                            <span class="txt">Computer</span>
+                            <span class="wsicon"><i class="las la-angle-right"></i></span>
+                            <div class="mega_menu">
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Macbook</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Mackbook m1</a>
+                                            <a href="#">Mackbook pro</a>
+                                            <a href="#">Mackbook air</a>
+                                            <a href="#">Mackbook 2015</a>
+                                            <a href="#">Mackbook 2020</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Laptop</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Razer</a>
+                                            <a href="#">Hp Laptop</a>
+                                            <a href="#">Dell Notebook</a>
+                                            <a href="#">Asus</a>
+                                            <a href="#">Lenovo</a>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="single_mega_menu">
-                                <div class="mega_menu_wrap">
-                                    <h4>Outerwear $ Jackets</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Jacket</a>
-                                        <a href="#">Sweaters</a>
-                                        <a href="#">Casual Faux Leather</a>
-                                        <a href="#">Parks</a>
-                                        <a href="#">Jeans</a>
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Dasktop</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Brand Dasktop</a>
+                                            <a href="#">All in one pc</a>
+                                            <a href="#">Mini PC</a>
+                                            <a href="#">Customize PC</a>
+                                            <a href="#">Dasktop Accessories</a>
+                                        </div>
+                                    </div>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Monitor</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Samsung</a>
+                                            <a href="#">Philips</a>
+                                            <a href="#">LG</a>
+                                            <a href="#">HP</a>
+                                            <a href="#">Xiaomi</a>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="mega_menu_wrap">
-                                    <h4>Underwear &amp; Loun</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Boxes</a>
-                                        <a href="#">Berifs</a>
-                                        <a href="#">Long Johns</a>
-                                        <a href="#">Men’s Sleep &amp; Lounge</a>
-                                        <a href="#">Parks</a>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="single_mega_menu">
-                                <div class="mega_menu_wrap">
-                                    <h4>Accessories</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Scarves</a>
-                                        <a href="#">Skullies &amp; Beanies</a>
-                                        <a href="#">Casual Faux Leather</a>
-                                        <a href="#">Prescription Glasses</a>
-                                        <a href="#">Belt</a>
+                                <div class="single_mega_menu">
+                                    <div class="mega_menu_wrap">
+                                        <h4>Accessories</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Dasktop Ram</a>
+                                            <a href="#">Motherboard</a>
+                                            <a href="#">SSD Card</a>
+                                            <a href="#">Hard disk</a>
+                                            <a href="#">Processor</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="mega_menu_wrap">
-                                    <h4>Novelty &amp; Special</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Cosplay Costumes</a>
-                                        <a href="#">Stage &amp; Dance Wear</a>
-                                        <a href="#">Exotic Apparel</a>
-                                        <a href="#">Scarves</a>
-                                        <a href="#">Men’s Sets</a>
+                                    <div class="mega_menu_wrap">
+                                        <h4>Gaming</h4>
+                                        <div class="mega_categories">
+                                            <a href="#">Gaming console</a>
+                                            <a href="#">Gaming Chair</a>
+                                            <a href="#">Gaming Desk</a>
+                                            <a href="#">Gaming Controller</a>
+                                            <a href="#">Keyboard</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="single_mega_menu brnd">
-                                <div class="mega_brands">
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-1.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-2.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-3.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-4.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-5.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-6.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-7.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-8.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-9.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-10.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-11.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-12.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-13.png" alt="brand">
-                                    </a>
-                                    <a href="#" class="mega_brnd_img">
-                                        <img loading="lazy" src="assets/images/brand-14.png" alt="brand">
-                                    </a>
-                                </div>
-                            </div>
-                        </div> 
+                        </div>
+                        <a href="#" class="singlecats">
+                            <span class="img_wrp">
+                                <i class="las la-mobile"></i>
+                            </span>
+                            <span class="txt">Mobile</span>
+                        </a>
                     </div>
-                    <a href="#" class="singlecats">
-                        <span class="img_wrp">
-                            <i class="bi bi-controller"></i>
-                        </span>
-                        <span class="txt">Sisteme Gaming & Office</span>
-                    </a>
-                    <a href="#" class="singlecats">
-                        <span class="img_wrp">
-                            <i class="bi bi-mouse"></i>
-                        </span>
-                        <span class="txt">Componente</span>
-                    </a>
-                    <a href="#" class="singlecats">
-                        <span class="img_wrp">
-                            <i class="bi bi-display"></i>
-                        </span>
-                        <span class="txt">TV & Video</span>
-                    </a>
-                    <div class="singlecats withsub">
-                        <span class="img_wrp">
-                            <i class="bi bi-keyboard"></i>
-                        </span>
-                        <span class="txt">Monitoare & Periferice</span>
-                        {{-- <span class="wsicon"><i class="las la-angle-right"></i></span> --}}
-                {{-- <div class="mega_menu">
-                            <div class="single_mega_menu">
-                                <div class="mega_menu_wrap">
-                                    <h4>Macbook</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Mackbook m1</a>
-                                        <a href="#">Mackbook pro</a>
-                                        <a href="#">Mackbook air</a>
-                                        <a href="#">Mackbook 2015</a>
-                                        <a href="#">Mackbook 2020</a>
-                                    </div>
-                                </div>
-                                <div class="mega_menu_wrap">
-                                    <h4>Laptop</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Razer</a>
-                                        <a href="#">Hp Laptop</a>
-                                        <a href="#">Dell Notebook</a>
-                                        <a href="#">Asus</a>
-                                        <a href="#">Lenovo</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- <div class="single_mega_menu">
-                                <div class="mega_menu_wrap">
-                                    <h4>Dasktop</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Brand Dasktop</a>
-                                        <a href="#">All in one pc</a>
-                                        <a href="#">Mini PC</a>
-                                        <a href="#">Customize PC</a>
-                                        <a href="#">Dasktop Accessories</a>
-                                    </div>
-                                </div>
-                                <div class="mega_menu_wrap">
-                                    <h4>Monitor</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Samsung</a>
-                                        <a href="#">Philips</a>
-                                        <a href="#">LG</a>
-                                        <a href="#">HP</a>
-                                        <a href="#">Xiaomi</a>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                {{-- <div class="single_mega_menu">
-                                <div class="mega_menu_wrap">
-                                    <h4>Accessories</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Dasktop Ram</a>
-                                        <a href="#">Motherboard</a>
-                                        <a href="#">SSD Card</a>
-                                        <a href="#">Hard disk</a>
-                                        <a href="#">Processor</a>
-                                    </div>
-                                </div>
-                                <div class="mega_menu_wrap">
-                                    <h4>Gaming</h4>
-                                    <div class="mega_categories">
-                                        <a href="#">Gaming console</a>
-                                        <a href="#">Gaming Chair</a>
-                                        <a href="#">Gaming Desk</a>
-                                        <a href="#">Gaming Controller</a>
-                                        <a href="#">Keyboard</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-                    <a href="#" class="singlecats">
-                        <span class="img_wrp">
-                            <i class="bi bi-android2"></i>
-                        </span>
-                        <span class="txt">Software</span>
-                    </a>
-                    {{-- <a href="#" class="singlecats">
-                        <span class="img_wrp">
-                            <i class="las la-mobile"></i>
-                        </span>
-                        <span class="txt">Retelistica</span>
-                    </a>
-                    <a href="#" class="singlecats">
-                        <span class="img_wrp">
-                            <i class="bi bi-dice-5-fill"></i>
-                        </span>
-                        <span class="txt">Mai multe</span>
-                    </a>
-                </div> --}}
+                </div>
             </div>
             <div class="search_wrap d-none d-lg-block">
-                <form action="/search/">
+                <form action="{{ route('SearchMenu') }}" method="POST">
+                    @csrf
                     <div class="search d-flex">
-                        <div class="search_category">
-                            <select name="category" class="nice_select">
-                                <option value="">Toate Categorile</option>
-                                <option value="">Men</option>
-                            </select>
-                        </div>
                         <div class="search_input">
-                            <input type="text" placeholder="cauta un produs..." name="search" id="show_suggest">
+                            <input type="text" style="border-radius: 5px 0px 0px 5px;"
+                                placeholder="cauta un produs..." name="query" id="query">
                         </div>
                         <div class="search_subimt">
                             <button type="submit">
@@ -324,19 +269,8 @@
                         </div>
                     </div>
                 </form>
-                <div class="search_suggest shadow-sm">
+                {{-- <div class="search_suggest shadow-sm">
                     <div class="search_result_product">
-                        <a href="" class="single_sresult_product">
-                            <div class="sresult_img">
-                                <img loading="lazy" src="assets/images/laptop-2.png" alt="product">
-                            </div>
-                            <div class="sresult_content">
-                                <h4>HP Pavilion 15</h4>
-                                <div class="price">
-                                    <span class="org_price">$45.00</span>
-                                </div>
-                            </div>
-                        </a>
                         <a href="" class="single_sresult_product">
                             <div class="sresult_img">
                                 <img loading="lazy" src="assets/images/laptop-1.png" alt="product">
@@ -350,12 +284,12 @@
                         </a>
 
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="header_icon d-flex align-items-center">
                 <a href="{{ route('favorite') }}" class="icon_wrp text-center wishlist ms-0">
                     <span class="icon">
-                        <i class="bi bi-suit-heart"></i>
+                        <i class="icon-heart"></i>
                     </span>
                     <span class="icon_text">Favorite</span>
                     <span class="pops">
@@ -369,7 +303,7 @@
                 <div class="shopcart">
                     <a href="{{ route('cart') }}" class="icon_wrp text-center d-none d-lg-block">
                         <span class="icon">
-                            <i class="bi bi-cart3"></i>
+                            <i class="icon-cart"></i>
                         </span>
                         <span class="icon_text">Cosul Meu</span>
                         <span class="pops">
@@ -385,7 +319,7 @@
                     <div class="position-relative myacwrap">
                         <a href="{{ route('account') }}" class="icon_wrp text-center myacc">
                             <span class="icon">
-                                <i class="bi bi-person"></i>
+                                <i class="icon-user-line"></i>
                             </span>
                             <span class="icon_text">cont</span>
                         </a>
@@ -451,13 +385,25 @@
                         <div class="myacc_cont">
                             <div class="ac_links">
                                 @foreach (json_decode($GroupPermission->permission, true) as $permission)
-                                    @if (isset($permission['admin/users'][0]) && $permission['admin/users'][0] == true)
-                                        <a href="">utilizatori</a>
+                                    @if (isset($permission['dashboard'][0]) && $permission['dashboard'][0] == 'true')
+                                        <a href="">dashboard</a>
                                     @endif
-                                    @if (isset($permission['admin/products'][0]) && $permission['admin/products'][0] == true)
-                                        <a href="">Produse</a>
+                                    @if (isset($permission['customers'][0]) && $permission['customers'][0] == 'true')
+                                        <a href="{{ route('admin/customers') }}">clientii</a>
                                     @endif
-                                    @if (isset($permission['admin/settings'][0]) && $permission['admin/settings'][0] == true)
+                                    @if (isset($permission['users'][0]) && $permission['users'][0] == 'true')
+                                        <a href="{{ route('admin/users') }}">utilizatori</a>
+                                    @endif
+                                    @if (isset($permission['group'][0]) && $permission['group'][0] == 'true')
+                                        <a href="{{ route('admin/group') }}">Grupuri</a>
+                                    @endif
+                                    @if (isset($permission['Category'][0]) && $permission['Category'][0] == 'true')
+                                        <a href="{{ route('admin/categories') }}">categorii</a>
+                                    @endif
+                                    @if (isset($permission['products'][0]) && $permission['products'][0] == 'true')
+                                        <a href="{{ route('admin/products') }}">Produse</a>
+                                    @endif
+                                    @if (isset($permission['settings'][0]) && $permission['settings'][0] == 'true')
                                         <a href="{{ route('settings/ManageSite') }}">setari</a>
                                     @endif
                                 @endforeach
@@ -498,7 +444,13 @@
             <i class="icon-cart"></i>
         </span>
         <span class="icon_text">Cart</span>
-        <span class="pops">8</span>
+        <span class="pops">
+            @if (!empty(session('cart')))
+                {{ count(session('cart')) }}
+            @else
+                0
+            @endif
+        </span>
     </a>
 </div>
 </div>
@@ -585,7 +537,7 @@
     </button>
 </form>
 
-<div class="search_result_product">
+{{-- <div class="search_result_product">
     <a href="product-view.html" class="single_sresult_product">
         <div class="sresult_img">
             <img loading="lazy" src="assets/images/laptop-2.png" alt="product">
@@ -610,7 +562,7 @@
             </div>
         </div>
     </a>
-</div>
+</div> --}}
 </div>
 
 <!-- mobile category -->
@@ -912,6 +864,5 @@
 <!-- breadcrumbs -->
 <div class="container">
 <div class="breadcrumbs">
-
 </div>
 </div>

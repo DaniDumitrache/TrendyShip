@@ -10,7 +10,7 @@ class ChangePasswordController extends Controller
 {
     public function index()
     {
-        return view('account-change-password');
+        return view('account.account-change-password');
     }
 
     public function ValidateChangePassword(Request $req)

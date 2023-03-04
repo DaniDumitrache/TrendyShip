@@ -1,21 +1,24 @@
 <div class="col-lg-3 col-sm-6">
     <div class="single_new_arrive">
-        <div class="sna_img">
-            <img loading="lazy" class="prd_img" src="assets/images/laptop-3.png" alt="product">
+        <div class="sna_img" style="display: flex;
+        justify-content: center;">
+            <img loading="lazy" style="max-height: 230px;"src="{{ route('ProductImage', $product->MainImage) }}"
+                alt="product">
             @if (!empty($product->Discount))
                 <span class="tag">-{{ $product->Discount }}%</span>
             @endif
             <div class="prodcut_hovcont">
-                <a href="javascript:void(0)" class="icon open_quickview" tabindex="0">
-                    <i class="icon-search-left"></i>
-                </a>
-                <a href="#" class="icon" tabindex="0">
-                    <i class="icon-heart"></i>
+                {{-- <a href="javascript:void(0)" class="icon open_quickview" tabindex="0">
+                 <i class="bi bi-search"></i>
+                </a> --}}
+                <a href="{{ route('AddToFavorite', $product->id) }}" class="icon" tabindex="0">
+                    <i class="bi bi-suit-heart"></i>
                 </a>
             </div>
         </div>
         <div class="sna_content">
-            <a href="@php echo implode('-', explode(' ', $product->Title)).'/'. $product->id @endphp">
+            <a
+                href="{{ route('ViewProduct', ['ProductName' => implode('-', explode(' ', $product->Title)), 'id' => $product->id]) }}">
                 <h4>{{ $product->Title }}</h4>
             </a>
             <div>

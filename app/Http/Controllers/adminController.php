@@ -7,6 +7,7 @@ use App\Models\Group;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Category;
+use App\Models\productsTable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -113,7 +114,45 @@ class adminController extends Controller
 
     public function AddProduct(Request $req)
     {
-        return $req;
+        $validation = $req->validate([
+            'name' => ['required'],
+            'category' => ['required'],
+            'description' => ['required'],
+            'price' => ['required'],
+            'stock' => ['required'],
+            // 'features' => ['required'],
+            'MainImage' => ['required']
+        ], []);
+
+        if (empty($req->image1) && empty($req->image2) && empty($req->image3) && empty($req->image4) && empty($req->image5) && empty($req->image6) && empty($req->image7) && empty($req->image8)) {
+            return redirect()->back()->withInput($req->only('ProductGlaery', 'remember'))->withErrors([
+                'ProductGlaery' => 'Trebuie să adăugați cel puțin o imagine în galeria produsului.'
+            ]);
+        }
+
+        if (!$validation) {
+            return back();
+        }
+
+
+        $images = [$req->image1, $req->image2, $req->image3, $req->image4, $req->image5, $req->image6, $req->image7];
+
+
+        foreach ($images as $key => $value) {
+            if (is_null($value) || $value == '')
+                unset($images[$key]);
+        }
+
+        $product = new productsTable;
+        $product->Title = $req->name;
+        $product->stock = $req->stock;
+        $product->description = $req->description;
+        $product->categoryes = $req->category;
+        $product->price = $req->price;
+        $product->images = json_encode($images);
+        $product->MainImage = $req->MainImage;
+        $product->timestamps = false;
+        $product->save();
     }
 
     public function AddUsers(Request $req)

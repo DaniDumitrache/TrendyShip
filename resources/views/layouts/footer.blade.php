@@ -9,9 +9,7 @@
                                 <img loading="lazy" src="assets/images/svg/logo.svg" alt="easy shop">
                             </div>
                             <div class="footet_text">
-                                <p>Lorem ipsum, or lipsum as it is sometimes kno
-                                    wn, is dummy text used in laying out print, gra
-                                    phic or web designs the passage.</p>
+                                <p>{{ $website_config->meta_description }}</p>
                             </div>
                         </div>
                         <div class="col-12 col-md-6 col-lg-12">
@@ -58,7 +56,7 @@
                                 <h4 class="footer_title">Suport clienti</h4>
                                 <a href="">Formular returnare produs</a>
                                 <a href="{{ route('contact') }}">Contact</a>
-                                <a href="">ANPC</a>
+                                <a href="https://anpc.ro/">ANPC</a>
                             </div>
                         </div>
                         <div class="col-6">
@@ -66,7 +64,7 @@
                                 <h4 class="footer_title">{{ config('app.name') }}</h4>
                                 <a href="">Despre {{ config('app.name') }}</a>
                                 <a href="">Termene si conditii</a>
-                                <a href="">ANPC</a>
+                                <a href="https://anpc.ro/">ANPC</a>
                             </div>
                         </div>
                     </div>

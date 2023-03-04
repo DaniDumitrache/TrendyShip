@@ -8,7 +8,7 @@
                                 </a>
                             </div>
                             <div class="acprof_cont">
-                                <p>salut,</p>
+                                <p>salut, {{ Auth::user()->name }}</p>
                                 <h4></h4>
                             </div>
                             <div class="profile_hambarg d-lg-none d-block">
@@ -23,14 +23,19 @@
                                         Contul meu
                                     </h4>
                                 </a>
+                                {{-- <a href="{{ route('PremiumMembership') }}">{{ config('app.name') }}</a> --}}
+                                {{-- <a href="{{ route('VouchersGiftCards') }}">Vouchere & carduri cadou</a> --}}
                                 <a href="{{ route('order') }}">Comenzile mele</a>
-                                <a href="">{{ config('app.name') }} <span class="text-color"
-                                        style="font-size: 18px">Premium</span></a>
+                                {{-- <a href="{{ route('Cards') }}">Cardurile mele</a> --}}
                                 <a href="{{ route('favorite') }}">Favorite</a>
-                                <a href="">Review-urile mele</a>
-                                <a href="{{ route('ManageAdress') }}">Date personale</a>
-                                <a href="">Setări siguranță</a>
-                                <a href="">Abonările mele</a>
+                                <a href="{{ route('Reviews') }}">Review-urile mele</a>
+                                {{-- <a href="{{ route('Guarantees') }}">Garanțiile mele</a>
+                                <a href="{{ route('Returns') }}">Retururile mele</a> --}}
+                                {{-- <a href="{{ route('Service') }}">Service</a> --}}
+                                <a href="{{ route('DeliveryAddresses') }}">Adrese de livrare</a>
+                                {{-- <a href="{{ route('ManageAdress') }}">Date personale</a> --}}
+                                <a href="{{ route('SecuritySettings') }}">Setări siguranță</a>
+                                <a href="{{ route('Subscriptions') }}">Abonările mele</a>
                             </div>
                             @if ($admin)
                             @empty(!$GroupPermission)

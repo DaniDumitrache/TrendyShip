@@ -23,26 +23,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($users as $user)
+                                            {{-- @foreach ($users as $user) --}}
                                                 <tr>
-                                                    <td>{{ $user['email'] }}</td>
-                                                    <td>{{ $user['group'] }}</td>
-                                                    @if (Auth::user()->email != $user['email'])
+                                                    <td></td>
+                                                    <td></td>
                                                         <td>
                                                             <a class="btn btn-success"
-                                                                href="{{ route('admin/users/edit', $user['user_id']) }}">
+                                                                href="">
                                                                 <i class="bi bi-pencil-square"></i>
                                                             </a>
                                                             <a class="btn btn-success"
-                                                                href="{{ route('admin/users/edit', $user['user_id']) }}">
+                                                                href="">
                                                                 <i class="bi bi-x-lg"></i>
                                                             </a>
                                                         </td>
-                                                    @else
-                                                        <td></td>
-                                                    @endif
                                                 </tr>
-                                            @endforeach
+                                            {{-- @endforeach --}}
                                         </tbody>
                                     </table>
                                 </div>

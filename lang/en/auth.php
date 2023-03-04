@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'Email sau parola invalid/a',
+    'failed' => 'Aceste acreditări nu se potrivesc cu înregistrările noastre',
     'password' => 'Email sau parola invalid/a',
-    'throttle' => 'Prea multe încercări de conectare. Vă rugăm să încercați din nou în :secunde secunde.',
+    'throttle' => 'Prea multe încercări de conectare. Vă rugăm să încercați din nou în :seconds secunde.',
 
 ];

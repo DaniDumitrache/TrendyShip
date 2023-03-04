@@ -32,7 +32,7 @@ class ManagePersonalProfileController extends Controller
 
     public function index()
     {
-        return view("account-manage-profile");
+        return view("account.manage-profile");
     }
 
 

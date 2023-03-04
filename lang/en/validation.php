@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines
@@ -13,57 +12,64 @@ return [
     |
     */
 
-    'accepted' => 'The :attribute must be accepted.',
-    'accepted_if' => 'The :attribute must be accepted when :other is :value.',
-    'active_url' => 'The :attribute is not a valid URL.',
-    'after' => 'The :attribute must be a date after :date.',
-    'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
-    'alpha' => 'The :attribute must only contain letters.',
-    'alpha_dash' => 'The :attribute must only contain letters, numbers, dashes and underscores.',
-    'alpha_num' => 'The :attribute must only contain letters and numbers.',
-    'array' => 'The :attribute must be an array.',
-    'before' => 'The :attribute must be a date before :date.',
-    'before_or_equal' => 'The :attribute must be a date before or equal to :date.',
+    'accepted' => ':attribute trebuie acceptat.',
+    'accepted_if' => ':attribute trebuie acceptat când :other si :value.',
+    'active_url' => ':attribute nu este o adresă URL validă.',
+    'after' => ':attribute trebuie să fie o dată după :date.',
+    'after_or_equal' =>
+        ':attribute trebuie să fie o dată ulterioară sau egală cu :date.',
+    'alpha' => ':attribute trebuie să conțină doar litere.',
+    'alpha_dash' =>
+        ':attributetrebuie să conțină numai litere, cifre, liniuțe și liniuțe de subliniere.',
+    'alpha_num' => ':attribute trebuie să conțină numai litere și cifre.',
+    'array' => ':attribute trebuie să fie o matrice.',
+    'before' => ':attribute trebuie să fie o întâlnire înainte :date.',
+    'before_or_equal' =>
+        ':attribute trebuie să fie o dată anterioară sau egală cu :date.',
     'between' => [
-        'array' => 'The :attribute must have between :min and :max items.',
-        'file' => 'The :attribute must be between :min and :max kilobytes.',
-        'numeric' => 'The :attribute must be between :min and :max.',
-        'string' => 'The :attribute must be between :min and :max characters.',
+        'array' => ':attribute trebuie să aibă între :min si :max items.',
+        'file' => ':attribute trebuie să fie între :min si :max kilobytes.',
+        'numeric' => ':attribute trebuie să fie între :min si :max.',
+        'string' => ':attribute trebuie să fie între :min si :max caractere.',
     ],
-    'boolean' => 'The :attribute field must be true or false.',
-    'confirmed' => 'The :attribute confirmation does not match.',
-    'current_password' => 'The password is incorrect.',
-    'date' => 'The :attribute is not a valid date.',
-    'date_equals' => 'The :attribute must be a date equal to :date.',
-    'date_format' => 'The :attribute does not match the format :format.',
-    'declined' => 'The :attribute must be declined.',
-    'declined_if' => 'The :attribute must be declined when :other is :value.',
-    'different' => 'The :attribute and :other must be different.',
-    'digits' => 'The :attribute must be :digits digits.',
-    'digits_between' => 'The :attribute must be between :min and :max digits.',
-    'dimensions' => 'The :attribute has invalid image dimensions.',
-    'distinct' => 'The :attribute field has a duplicate value.',
-    'doesnt_end_with' => 'The :attribute may not end with one of the following: :values.',
-    'doesnt_start_with' => 'The :attribute may not start with one of the following: :values.',
-    'email' => 'The :attribute must be a valid email address.',
-    'ends_with' => 'The :attribute must end with one of the following: :values.',
-    'enum' => 'The selected :attribute is invalid.',
-    'exists' => 'The selected :attribute is invalid.',
-    'file' => 'The :attribute must be a file.',
-    'filled' => 'The :attribute field must have a value.',
+    'boolean' => ':attribute câmpul trebuie să fie adevărat sau fals.',
+    'confirmed' => ':attribute confirmarea nu se potrivește.',
+    'current_password' => 'Parola este incorecta.',
+    'date' => ':attribute nu este o dată valabilă.',
+    'date_equals' => ':attribute trebuie să fie o dată egală cu :date.',
+    'date_format' => ':attribute nu se potrivește cu formatul :format.',
+    'declined' => ':attribute trebuie refuzat.',
+    'declined_if' => ':attribute trebuie refuzat când :other este :value.',
+    'different' => ':attribute si :other trebuie să fie diferit.',
+    'digits' => ':attribute trebuie să fie :digits cifre.',
+    'digits_between' => ':attribute trebuie să fie între :min si :max cifre.',
+    'dimensions' => ':attribute are dimensiuni nevalide ale imaginii.',
+    'distinct' => ':attribute câmpul are o valoare duplicat.',
+    'doesnt_end_with' =>
+        ':attribute nu se poate termina cu unul dintre following: :values.',
+    'doesnt_start_with' => 'nu poate începe cu una dintre following: :values.',
+    ':attribute este posibil să nu înceapă cu unul dintre following: :values.',
+    'email' => 'Trebuie sa fie o adresa de email valida.',
+    'ends_with' => 'trebuie să se încheie cu una dintre following: :values.',
+    'enum' => 'Cel selectat :attribute este invalid.',
+    'exists' => 'Cel selectat :attribute este invalid.',
+    'file' => ':attribute trebuie să fie un fișier.',
+    'filled' => ':attribute câmpul trebuie să aibă o valoare.',
     'gt' => [
-        'array' => 'The :attribute must have more than :value items.',
-        'file' => 'The :attribute must be greater than :value kilobytes.',
-        'numeric' => 'The :attribute must be greater than :value.',
-        'string' => 'The :attribute must be greater than :value characters.',
+        'array' => ':attribute trebuie să aibă mai mult decât :value articole.',
+        'file' => ':attribute trebuie să fie mai mare decât :value kilobytes.',
+        'numeric' => ':attribute trebuie să fie mai mare decât :value.',
+        'string' => ':attribute trebuie să fie mai mare decât :value caractere.',
     ],
     'gte' => [
-        'array' => 'The :attribute must have :value items or more.',
-        'file' => 'The :attribute must be greater than or equal to :value kilobytes.',
-        'numeric' => 'The :attribute must be greater than or equal to :value.',
-        'string' => 'The :attribute must be greater than or equal to :value characters.',
+        'array' => ':attribute trebuie să aibă :value articole sau mai multe.',
+        'file' =>
+            ':attribute trebuie să fie mai mare sau egal cu :value kilobytes.',
+        'numeric' => ':attribute trebuie să fie mai mare sau egal cu :value.',
+        'string' =>
+            ':attribute trebuie să fie mai mare sau egal cu :value caractere.',
     ],
-    'image' => 'The :attribute must be an image.',
+    'image' => ':attribute trebuie să fie o imagine.',
     'in' => 'The selected :attribute is invalid.',
     'in_array' => 'The :attribute field does not exist in :other.',
     'integer' => 'The :attribute must be an integer.',
@@ -80,25 +86,27 @@ return [
     ],
     'lte' => [
         'array' => 'The :attribute must not have more than :value items.',
-        'file' => 'The :attribute must be less than or equal to :value kilobytes.',
+        'file' =>
+            'The :attribute must be less than or equal to :value kilobytes.',
         'numeric' => 'The :attribute must be less than or equal to :value.',
-        'string' => 'The :attribute must be less than or equal to :value characters.',
+        'string' =>
+            'The :attribute must be less than or equal to :value characters.',
     ],
     'mac_address' => 'The :attribute must be a valid MAC address.',
     'max' => [
-        'array' => 'The :attribute must not have more than :max items.',
-        'file' => 'The :attribute must not be greater than :max kilobytes.',
-        'numeric' => 'The :attribute must not be greater than :max.',
-        'string' => 'The :attribute must not be greater than :max characters.',
+        'array' => 'nu trebuie să fie mai mic decât :max.',
+        'file' => 'nu trebuie să fie mai mic decât :max kilobytes.',
+        'numeric' => 'nu trebuie să fie mai mic decât :max.',
+        'string' => 'nu trebuie să fie mai mic decât :max.',
     ],
     'max_digits' => 'The :attribute must not have more than :max digits.',
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'array' => 'The :attribute must have at least :min items.',
-        'file' => 'The :attribute must be at least :min kilobytes.',
-        'numeric' => 'The :attribute must be at least :min.',
-        'string' => 'The :attribute must be at least :min characters.',
+        'array' => 'Trebuie sa aiba cel putin :min articole.',
+        'file' => 'Trebuie sa aiba cel putin :min kilobytes.',
+        'numeric' => 'Trebuie sa aiba cel putin :min.',
+        'string' => 'Trebuie sa aiba cel putin :min caractere.',
     ],
     'min_digits' => 'The :attribute must have at least :min digits.',
     'multiple_of' => 'The :attribute must be a multiple of :value.',
@@ -106,42 +114,54 @@ return [
     'not_regex' => 'The :attribute format is invalid.',
     'numeric' => 'The :attribute must be a number.',
     'password' => [
-        'letters' => 'The :attribute must contain at least one letter.',
-        'mixed' => 'The :attribute must contain at least one uppercase and one lowercase letter.',
-        'numbers' => 'The :attribute must contain at least one number.',
-        'symbols' => 'The :attribute must contain at least one symbol.',
-        'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
+        'letters' => 'trebuie să conțină cel puțin o literă.',
+        'mixed' =>
+            'trebuie să conțină cel puțin o literă mare și o literă mică.',
+        'numbers' => 'trebuie să conţină cel puţin un număr',
+        'symbols' => 'trebuie să conțină cel puțin un simbol.',
+        'uncompromised' =>
+            ':attribute dat a apărut într-o scurgere de date. Vă rugăm să alegeți un alt :attribute.',
     ],
     'present' => 'The :attribute field must be present.',
     'prohibited' => 'The :attribute field is prohibited.',
-    'prohibited_if' => 'The :attribute field is prohibited when :other is :value.',
-    'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
+    'prohibited_if' =>
+        'The :attribute field is prohibited when :other is :value.',
+    'prohibited_unless' =>
+        'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
-    'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
-    'required_array_keys' => 'The :attribute field must contain entries for: :values.',
+    'regex' => 'The :attribute formatul este invalid.',
+    'required' => 'Acest camp este obligatoriu',
+    'required_array_keys' =>
+        'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
-    'required_if_accepted' => 'The :attribute field is required when :other is accepted.',
-    'required_unless' => 'The :attribute field is required unless :other is in :values.',
-    'required_with' => 'The :attribute field is required when :values is present.',
-    'required_with_all' => 'The :attribute field is required when :values are present.',
-    'required_without' => 'The :attribute field is required when :values is not present.',
-    'required_without_all' => 'The :attribute field is required when none of :values are present.',
-    'same' => 'The :attribute and :other must match.',
+    'required_if_accepted' =>
+        'The :attribute field is required when :other is accepted.',
+    'required_unless' =>
+        'The :attribute field is required unless :other is in :values.',
+    'required_with' =>
+        'The :attribute field is required when :values is present.',
+    'required_with_all' =>
+        'The :attribute field is required when :values are present.',
+    'required_without' =>
+        'The :attribute field is required when :values is not present.',
+    'required_without_all' =>
+        'The :attribute field is required when none of :values are present.',
+    'same' => ':attribute și :other trebuie să se potrivească.',
     'size' => [
         'array' => 'The :attribute must contain :size items.',
         'file' => 'The :attribute must be :size kilobytes.',
         'numeric' => 'The :attribute must be :size.',
         'string' => 'The :attribute must be :size characters.',
     ],
-    'starts_with' => 'The :attribute must start with one of the following: :values.',
-    'string' => 'The :attribute must be a string.',
-    'timezone' => 'The :attribute must be a valid timezone.',
-    'unique' => 'The :attribute has already been taken.',
-    'uploaded' => 'The :attribute failed to upload.',
-    'uppercase' => 'The :attribute must be uppercase.',
-    'url' => 'The :attribute must be a valid URL.',
-    'uuid' => 'The :attribute must be a valid UUID.',
+    'starts_with' =>
+        ':attribute trebuie să înceapă cu unul dintre following: :values.',
+    'string' => ':attribute trebuie să fie un șir.',
+    'timezone' => ':attribute trebuie să fie un fus orar valid.',
+    'unique' => ':attribute a fost deja luat.',
+    'uploaded' => ':attribute nu s-a putut încărca.',
+    'uppercase' => ':attribute trebuie să fie majuscule.',
+    'url' => ':attribute trebuie să fie o adresă URL validă.',
+    'uuid' => ':attribute trebuie să fie un UUID valid.',
 
     /*
     |--------------------------------------------------------------------------
@@ -154,14 +174,7 @@ return [
     |
     */
 
-    'custom' => [
-        'password'  => [
-            'required' => 'Acest camp este obligatoriu',
-        ],
-        'email' => [
-            'required' => 'Acest camp este obligatoriu',
-        ],
-    ],
+    'custom' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -175,5 +188,4 @@ return [
     */
 
     'attributes' => [],
-
 ];

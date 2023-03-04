@@ -11,7 +11,7 @@ class ForgotPasswordController extends Controller
 {
     public function index()
     {
-        return view("ForgotPassword");
+        return view("auth.ForgotPassword");
     }
 
     public function ValidateForgotPassword(Request $req)

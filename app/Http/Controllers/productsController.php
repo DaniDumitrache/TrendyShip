@@ -40,7 +40,7 @@ class productsController extends Controller
         $this->RelatedProducts($pd->Title, $pd->categoryes);
 
         if (count($product) >= 1) {
-            return view('product-view')->with(['Product' => $product, 'RelatedProducts' => $this->RelatedProducts]);
+            return view('ItemDetails')->with(['Product' => $product, 'RelatedProducts' => $this->RelatedProducts]);
         } else {
             abort(404);
         }
@@ -66,39 +66,10 @@ class productsController extends Controller
         $Discounts = productsTable::all();
         $NewProducts = productsTable::orderBy('id', 'DESC')->get();
 
-        return view('NewProducts')->with(['products' => $Discounts, 'NewProducts' => $NewProducts]);
+        return view('LatestProducts')->with(['products' => $Discounts, 'NewProducts' => $NewProducts]);
     }
 
-    // Favorite
-    public function AddToFavorite(Request $req, $id)
-    {
-        $products = productsTable::where('id', ['id' => $id])->get();
-
-        $items = Session::get('favorite', []);
-
-
-        if (!isset($items[array_search($id, $items)])) {
-            if (count($products) == 1) {
-                session()->push('favorite', $id);
-            }
-        }
-
-        return back();
-    }
-
-    public function RemoveFromFavorite(Request $req, $id)
-    {
-        $items = Session::get('cart', []);
-
-        if (($key = array_search($id, $items)) !== false) {
-            unset($items[$key]);
-        }
-
-        Session::put('cart', $items);
-
-        return back();
-    }
-
+    
     public function GetFavoriteData()
     {
         if (empty(session("favorite"))) {
@@ -109,70 +80,10 @@ class productsController extends Controller
 
         $CartProducts = productsTable::whereIn('id', $id)->get();
 
-        return view("wish-list")->with(["FavoriteProducts" => $CartProducts]);
+        return view("Favourites")->with(["FavoriteProducts" => $CartProducts]);
     }
 
-    public function MoveToFavorite(Request $req, $id)
-    {
-
-        if (!session()->has('favorite')) {
-            session()->put('favorite', []);
-        }
-
-        $FavoriteItems = Session::get('favorite', []);
-        $CartItems = Session::get('cart', []);
-
-        if (($FavoriteKey = array_search($id, $FavoriteItems)) !== true && ($CartKey = array_search($id, $CartItems)) !== false) {
-            unset($CartItems[$CartKey]);
-
-            Session::put('cart', $CartItems);
-            session()->push('favorite', $id);
-        }
-
-        return back();
-    }
-
-    // Cart
-    public function addToCart($productId)
-    {
-        // Check if the product exists in the database
-        $product = productsTable::find($productId);
-        if (!$product) {
-            // Return an error if the product doesn't exist
-            return response()->json(['error' => 'Product not found'], 404);
-        }
-
-        // Check if the product is already in the cart
-        $cart = session()->get('cart', []);
-        if (isset($cart[$productId])) {
-            // If the product is already in the cart, increment the quantity
-            $cart[$productId]['quantity']++;
-        } else {
-            // If the product is not in the cart, add it with a quantity of 1
-            $cart[$productId] = [
-                'id' => $productId,
-                'quantity' => 1
-            ];
-        }
-
-        // Save the updated cart to the session
-        session()->put('cart', $cart);
-
-        return response()->json(['success' => 'Product added to cart']);
-    }
-    public function RemoveFromCart(Request $req, $id)
-    {
-        $items = Session::get('cart', []);
-
-        if (($key = array_search($id, $items)) !== false) {
-            unset($items[$key]);
-        }
-
-        Session::put('cart', $items);
-
-        return back();
-    }
-
+  
     public function GetCartData()
     {
 

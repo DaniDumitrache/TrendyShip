@@ -122,6 +122,7 @@ class CartController extends Controller
 
         if ($total >= 200) {
             $total -= $this->DeliveryCost;
+            $this->DeliveryCost = 0;
         }
 
         $total = $total + $this->DeliveryCost;
@@ -164,6 +165,6 @@ class CartController extends Controller
     public function cart(Request $req)
     {
         $this->GetCartData();
-        return view("shopping-cart")->with(["CartProducts" => $this->CartData["CartProducts"], "OrderData" => $this->CartData["order"], "Cupon" => $this->CartData['Cupon']]); 
+        return view("cart")->with(["CartProducts" => $this->CartData["CartProducts"], "OrderData" => $this->CartData["order"], "Cupon" => $this->CartData['Cupon']]);
     }
 }

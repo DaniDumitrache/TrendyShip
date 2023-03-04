@@ -20,6 +20,11 @@
                                                 <th>email</th>
                                                 <th>group</th>
                                                 <th>actions</th>
+                                                <th>
+                                                    <a class="btn btn-success" href="{{ route('admin/users/create') }}">
+                                                        <i class="bi bi-plus-lg"></i>
+                                                    </a>
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -41,6 +46,7 @@
                                                     @else
                                                         <td></td>
                                                     @endif
+                                                    <td></td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -17,30 +17,24 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>email</th>
                                                 <th>group</th>
                                                 <th>actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($users as $user)
+                                            @foreach ($group as $group)
                                                 <tr>
-                                                    <td>{{ $user['email'] }}</td>
-                                                    <td>{{ $user['group'] }}</td>
-                                                    @if (Auth::user()->email != $user['email'])
-                                                        <td>
-                                                            <a class="btn btn-success"
-                                                                href="{{ route('admin/users/edit', $user['user_id']) }}">
-                                                                <i class="bi bi-pencil-square"></i>
-                                                            </a>
-                                                            <a class="btn btn-success"
-                                                                href="{{ route('admin/users/edit', $user['user_id']) }}">
-                                                                <i class="bi bi-x-lg"></i>
-                                                            </a>
-                                                        </td>
-                                                    @else
-                                                        <td></td>
-                                                    @endif
+                                                    <td>{{ $group['group'] }}</td>
+                                                    <td>
+                                                        <a class="btn btn-success"
+                                                            href="">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                        </a>
+                                                        <a class="btn btn-success"
+                                                            href="">
+                                                            <i class="bi bi-x-lg"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
