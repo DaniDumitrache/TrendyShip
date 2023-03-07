@@ -147,7 +147,7 @@ class CustomerController extends Controller
   "sendAsShort": true
 }',
             CURLOPT_HTTPHEADER => [
-                'Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDAwODBmNDFmN2I5NDAwMDIxODA1NDYifQ.4dpd5P3OO6gWOJeToN6U6gjiKUx5bCwl14jBVem4_8g',
+                'Authorization: API_KEY',
                 'Content-Type: application/json',
             ],
         ]);
