@@ -375,7 +375,9 @@
                 {{-- check if user is admin or not :) --}}
                 @if (isset($admin) && $admin)
                 @empty(!$GroupPermission)
-                    <div class="position-relative myacwrap">
+                <div class="position-relative myacwrap">
+                </div>
+                <div class="position-relative myacwrap">
                         <a href="{{ route('account') }}" class="icon_wrp text-center myacc">
                             <span class="icon">
                                 <i class="bi bi-plus-circle-dotted"></i>

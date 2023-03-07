@@ -30,9 +30,11 @@
                                         <label for="category">Categoria produsului</label>
                                         <select class="form-control" id="category" name="category">
                                             <option value="">Alege o categorie</option>
-                                            <option value="1}">danid</option>
+                                            @foreach ($categoryes as $category)
+                                                <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                            @endforeach
                                         </select>
-                                        @error('NewPassword')
+                                        @error('category')
                                             <span class="invalid-feedback">
                                                 {{ $message }}
                                             </span>

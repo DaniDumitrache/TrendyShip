@@ -15,581 +15,449 @@ use Illuminate\Support\Facades\Response;
 |
 */
 
-Route::group(
-    ['middleware' => [App\Http\Middleware\WebsiteConfigMiddleware::class]],
+Route::get('/products/{filename}', function ($filename) {
+    $path = storage_path('/app/public/products/' . $filename . '.jpg');
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header('Content-Type', $type);
+
+    return $response;
+})->name('ProductImage');
+
+// return website_config data
+Route::middleware(App\Http\Middleware\WebsiteConfigMiddleware::class)->group(
     function () {
         Auth::routes();
 
-        Route::post('/upload/image/', [
-            App\Http\controllers\image::class,
-            'imageup',
-        ]);
-
-        Route::get('/products/{filename}', function ($filename) {
-            $path = storage_path('/app/public/products/' . $filename . '.jpg');
-
-            $file = File::get($path);
-            $type = File::mimeType($path);
-
-            $response = Response::make($file, 200);
-            $response->header('Content-Type', $type);
-
-            return $response;
-        })->name('ProductImage');
-        Route::group(
-            ['middleware' => [App\Http\Middleware\AdminAuth::class]],
+        // return admin data : logged on account admin : etc
+        Route::middleware(App\Http\Middleware\AdminAuth::class)->group(
             function () {
-                Route::group(
-                    [
-                        'middleware' => [
-                            App\Http\Middleware\SiteMaintenance::class,
-                        ],
-                    ],
-                    function () {
-                        /* AUTH (START) */
+                /* 
+                check if in website_config is maintanance_mode is true. if is true then redirect user to maintenance page 
+                if he is admin it will not redirect him
+                */
+                Route::middleware(App\Http\Middleware\SiteMaintenance::class)->group(function () {
 
-                        Route::post('/admin/settings/ManageSite', [
-                            App\Http\Controllers\adminController::class,
-                            'EditSiteSettings',
-                        ])->name('WebsiteSettings');
-                        Route::post('/admin/settings/Login', [
-                            App\Http\Controllers\adminController::class,
-                            'EditLoginSettings',
-                        ])->name('LoginSettings');
-                        Route::post('/admin/settings/Smtp', [
-                            App\Http\Controllers\adminController::class,
-                            'EditSmtpSettings',
-                        ])->name('SmtpSettings');
-                        Route::post('/admin/settings/Seo', [
-                            App\Http\Controllers\adminController::class,
-                            'EditSeoSettings',
-                        ])->name('SeoSettings');
-                        Route::post('/admin/settings/Stripe', [
-                            App\Http\Controllers\adminController::class,
-                            'EditStripeSettings',
-                        ])->name('StripeSettings');
-                        Route::post('/admin/settings/GoogleAdWords', [
-                            App\Http\Controllers\adminController::class,
-                            'EditGoogleAdWordsSettings',
-                        ])->name('GoogleAdWordsSettings');
-                        Route::post('/admin/settings/GoogleLogin', [
-                            App\Http\Controllers\adminController::class,
-                            'EditGoogleLoginSettings',
-                        ])->name('GoogleLoginSettings');
+                    Route::controller(App\Http\Controllers\productsController::class)->group(function () {
+                        Route::get('/', 'GetProduct')->name('home');
 
-                        Route::post('/admin/group/create', [
-                            App\Http\Controllers\adminController::class,
-                            'AddGroup',
-                        ])->name('CreateGroup');
-                        Route::post('/admin/Category/create', [
-                            App\Http\Controllers\adminController::class,
-                            'AddCategory',
-                        ])->name('CreateCategory');
-                        Route::post('/admin/products/create', [
-                            App\Http\Controllers\adminController::class,
-                            'AddProduct',
-                        ])->name('CreateProduct');
-                        Route::post('/admin/customers/create', [
-                            App\Http\Controllers\adminController::class,
-                            'AddCustomer',
-                        ])->name('CreateCustomer');
-
-                        // users
-                        Route::post('/admin/users/create', [
-                            App\Http\Controllers\adminController::class,
-                            'AddUsers',
-                        ])->name('CreateUsers');
-                        Route::post('/admin/users/{email}/edit', [
-                            App\Http\Controllers\adminController::class,
-                            'EditUsers',
-                        ])->name('EditUsers');
-
-                        // Forgot Password
-                        Route::get('/ForgotPassword', [
-                            App\Http\Controllers\ForgotPasswordController::class,
-                            'index',
-                        ])->name('ForgotPassword');
-                        Route::post('/ForgotPassword', [
-                            App\Http\Controllers\ForgotPasswordController::class,
-                            'ValidateForgotPassword',
-                        ])->name('ForgotPassword');
-
-                        // Reset Password
-                        Route::get('/ResetPassword/{email}/{token}', [
-                            App\Http\Controllers\ResetPasswordController::class,
-                            'index',
-                        ])->name('ResetPassword');
-                        Route::post('/ResetPassword', [
-                            App\Http\Controllers\ResetPasswordController::class,
-                            'ValidateResetPassword',
-                        ])->name('ResetPassword');
-                        Route::post('/ValidatePassword', [
-                            App\Http\Controllers\auth\ValidatePassword::class,
-                            'ValidatePassword',
-                        ])->name('ValidatePassword');
-
-                        /* AUTH (END) */
-
-                        /* HOME (START) */
-
-                        // Home
-                        Route::get('/', [
-                            App\Http\Controllers\productsController::class,
-                            'GetProduct',
-                        ]);
-
-                        Route::get('/faq', function () {
-                            return view('faq');
-                        })->name('faq');
-
-                        // Search SearchMenu
-                        Route::get('/search/{categoryes}/{productName}', [
-                            App\Http\Controllers\SearchProductController::class,
-                            'Search',
-                        ])->name('search');
-                        Route::post('/search/', [
-                            App\Http\Controllers\SearchProductController::class,
-                            'SearchMenu',
-                        ])->name('SearchMenu');
-
-                        /* HOME (END) */
-
-                        // Products
-                        Route::get('/ProduseNoi', [
-                            App\Http\Controllers\productsController::class,
-                            'NewProducts',
-                        ])->name('NewProducts');
-
-                        // Cart
-                        Route::get('/cart', [
-                            App\Http\Controllers\CartController::class,
-                            'cart',
-                        ])->name('cart');
-
-                        Route::get('/cart/AddToCart/{id}', [
-                            App\Http\Controllers\CartController::class,
-                            'AddToCart',
-                        ])->name('AddToCart');
-
-                        Route::get('/cart/RemoveToCart/{id}', [
-                            App\Http\Controllers\CartController::class,
-                            'RemoveFromCart',
-                        ])->name('RemoveFromCart');
-
-                        Route::get('/cart/remove-quantity/{id}', [
-                            App\Http\Controllers\CartController::class,
-                            'RemoveQuantity',
-                        ])->name('RemoveQuantity');
-
-                        Route::get('/cart/add-quantity/{id}', [
-                            App\Http\Controllers\CartController::class,
-                            'AddQuantity',
-                        ])->name('AddQuantity');
-
-                        // Favorite
-                        Route::get('/AddToFavorite/{id}', [
-                            App\Http\Controllers\FavoriteController::class,
-                            'AddToFavorite',
-                        ])->name('AddToFavorite');
-
-                        Route::get('/RemoveToFavorite/{id}', [
-                            App\Http\Controllers\FavoriteController::class,
-                            'RemoveFromFavorite',
-                        ])->name('RemoveFromFavorite');
-
-                        Route::get('/favorites', [
-                            App\Http\Controllers\productsController::class,
-                            'GetFavoriteData',
-                        ])->name('favorite');
-
-                        Route::get('/MoveToFavorite/{id}', [
-                            App\Http\Controllers\productsController::class,
-                            'MoveToFavorite',
-                        ]);
-
-                        // CheckOut
-                        Route::get('/AddDelivery', function () {
-                            return redirect('/');
-                        });
-                        Route::post('/AddDelivery', [
-                            App\Http\Controllers\Checkout::class,
-                            'store',
-                        ])->name('AddDelivery');
-                        Route::get('/payment', [
-                            App\Http\Controllers\CheckOut::class,
-                            'CheckOut',
-                        ])->name('Checkout');
-                        Route::post('/PaymentCupon', [
-                            App\Http\Controllers\Coupons::class,
-                            'ValidateCupon',
-                        ]);
-                        Route::get('/PaymentCuponClose', [
-                            App\Http\Controllers\Coupons::class,
-                            'UnSetCupon',
-                        ]);
-
-                        Route::post('/ChangeEmail', [
-                            App\Http\Controllers\CustomerController::class,
-                            'ChangeEmail',
-                        ])->name('ChangeEmail');
-
-                        Route::group(
-                            [
-                                'middleware' => [
-                                    App\Http\Middleware\AuthMiddleware::class,
-                                ],
-                            ],
-                            function () {
-                                // account
-                                Route::get('/account', [
-                                    App\Http\Controllers\CustomerController::class,
-                                    'account',
-                                ])->name('account');
-                                // Route::get('/ManageAdress', function () {
-                                //     return view('account-manage-address');
-                                // });
-                                Route::get('/account/ManageAdress', [
-                                    App\Http\Controllers\ManageAdressController::class,
-                                    'index',
-                                ])->name('ManageAdress');
-                                Route::post('/account/ManageAdress', [
-                                    App\Http\Controllers\ManageAdressController::class,
-                                    'ValidateEditAdress',
-                                ])->name('ManageAdress');
-                                Route::get('/account/ManageProfile', [
-                                    App\Http\Controllers\ManagePersonalProfileController::class,
-                                    'index',
-                                ])->name('ManageProfile');
-                                Route::post('/account/ManageProfile', [
-                                    App\Http\Controllers\ManagePersonalProfileController::class,
-                                    'ValidateEditProfile',
-                                ])->name('ManageProfileValidate');
-
-                                Route::post('/account/ChangePassword', [
-                                    App\Http\Controllers\CustomerController::class,
-                                    'ChangePassword',
-                                ])->name('ChangePassword');
-
-                                Route::post('SendVerificationCode2fa', [
-                                    App\Http\Controllers\CustomerController::class,
-                                    'SendVerificationCode2fa',
-                                ])->name('SendVerificationCode2fa');
-
-                                Route::post('Activate2fa', [
-                                    App\Http\Controllers\CustomerController::class,
-                                    'Activate2fa',
-                                ])->name('Activate2fa');
-
-                                // order
-                                Route::get('/account/history/shopping', [
-                                    App\Http\Controllers\CustomerController::class,
-                                    'order',
-                                ])->name('order');
-                                Route::get('/account/order/tracking/{id}', [
-                                    App\Http\Controllers\CustomerController::class,
-                                    'orderDetalis',
-                                ])->name('OrderDetalis');
-
-                                /* Address (Start) */
-
-                                Route::get('/DeleteAdress/{address_id}', [
-                                    App\Http\Controllers\DeliveryAddressesController::class,
-                                    'DeleteAddress',
-                                ])->name('DeleteAddress');
-
-                                Route::get('/AddAddress', function () {
-                                    return view('account.address.AddAdress');
-                                })->name('AddAdress');
-
-                                Route::get('/EditAddress/{id}', [
-                                    App\Http\Controllers\DeliveryAddressesController::class,
-                                    'AddressData',
-                                ])->name('EditAdress');
-
-                                Route::post('/EditAddress}', [
-                                    App\Http\Controllers\DeliveryAddressesController::class,
-                                    'EditAddress',
-                                ])->name('EditAddress');
-
-                                /* Address (End) */
-
-                                Route::get('/ValidatePassword', function () {
-                                    return view('auth.ValidatePassword');
-                                })->name('ValidatePassword');
-
-                                Route::get('/SecuritySettings', function () {
-                                    return view(
-                                        'account.settings.SecuritySettings'
-                                    );
-                                })->name('SecuritySettings');
-
-                                Route::get('/DeliveryAddresses', [
-                                    App\Http\Controllers\DeliveryAddressesController::class,
-                                    'index',
-                                ])->name('DeliveryAddresses');
-                                Route::post('/DeliveryAddresses', [
-                                    App\Http\Controllers\DeliveryAddressesController::class,
-                                    'addAdresses',
-                                ])->name('addAdress');
-                                Route::post('/ActionSafeSetings', [
-                                    App\Http\Controllers\CustomerController::class,
-                                    'ActionSafeSetings',
-                                ])->name('ActionSafeSetings');
-
-                                Route::get('/Returns', function () {
-                                    return view('account.Returns');
-                                })->name('Returns');
-
-                                Route::get('/Reviews', function () {
-                                    return view('account.Reviews');
-                                })->name('Reviews');
-
-                                Route::get('/Guarantees', function () {
-                                    return view('account.Guarantees');
-                                })->name('Guarantees');
-
-                                Route::get('/PremiumMembership', function () {
-                                    return view('account.PremiumMembership');
-                                })->name('PremiumMembership');
-
-                                Route::get('/VouchersGiftCards', function () {
-                                    return view('account.VouchersGiftCards');
-                                })->name('VouchersGiftCards');
-
-                                Route::get('/Cards', function () {
-                                    return view('account.Cards');
-                                })->name('Cards');
-
-                                Route::get('/Service', function () {
-                                    return view('account.Service');
-                                })->name('Service');
-
-                                Route::get('/Subscriptions', [App\Http\Controllers\UserNotificationController::class,'index'])->name('Subscriptions');
-
-                                Route::post('/NotificationSettings', [App\Http\Controllers\UserNotificationController::class,'EditNotificationSettings'])->name('NotificationSettings');
-                            }
+                        Route::get('/ProduseNoi', 'NewProducts')->name(
+                            'NewProducts'
                         );
-                        // Contact
-                        Route::get('/contact', function () {
-                            return view('/contact-us');
-                        })->name('contact');
-                        Route::post('/ContactSent', [
-                            App\Http\Controllers\ConatctController::class,
-                            'store',
-                        ]);
 
-                        // Products
-                        Route::get('/Produse/{ProductName}/{id}', [
-                            App\Http\Controllers\productsController::class,
-                            'ProductPreview',
-                        ])->name('ViewProduct');
+                        Route::get('/favorites', 'GetFavoriteData')->name(
+                            'favorite'
+                        );
 
-                        // Info
-                        Route::get('aboutUs', function () {
-                            return view('about-us');
-                        });
-                        Route::group(
-                            [
-                                'middleware' => [
-                                    App\Http\Middleware\AdminAuthenticationMiddleware::class,
-                                ],
-                            ],
-                            function () {
-                                /* (Settings)(Start) */
-                                Route::get(
-                                    'admin/settings/Advertising',
-                                    function () {
-                                        return view(
-                                            'admin.settings.AdvertisingConfiguration'
-                                        );
-                                    }
-                                )->name('settings/Advertising');
+                        Route::get('/MoveToFavorite/{id}', 'MoveToFavorite');
 
-                                Route::get(
-                                    'admin/settings/GoogleLogin',
-                                    function () {
-                                        return view(
-                                            'admin.settings.configGoogleLogin'
-                                        );
-                                    }
-                                )->name('settings/GoogleLogin');
+                        Route::get(
+                            '/Produse/{ProductName}/{id}',
+                            'ProductPreview'
+                        )->name('ViewProduct');
+                    });
 
-                                Route::get(
-                                    'admin/settings/Social',
-                                    function () {
-                                        return view(
-                                            'admin.settings.configSocialLink'
-                                        );
-                                    }
-                                )->name('settings/Social');
+                    Route::controller(App\Http\Controllers\SearchProductController::class)->group(function () {
+                        Route::get('/search/{productName}', 'Search')->name(
+                            'search'
+                        );
+                        Route::post('/search/', 'SearchMenu')->name(
+                            'SearchMenu'
+                        );
+                    });
 
-                                Route::get(
-                                    'admin/settings/EditSettings',
-                                    function () {
-                                        return view(
-                                            'admin.settings.EditSettings'
-                                        );
-                                    }
-                                )->name('EditSettings');
+                    Route::controller(App\Http\Controllers\CartController::class)->group(function () {
+                        Route::get('/cart', 'cart')->name('cart');
 
-                                Route::get(
-                                    'admin/settings/EmailServer',
-                                    function () {
-                                        return view(
-                                            'admin.settings.EmailServerConfiguration'
-                                        );
-                                    }
-                                )->name('settings/EmailServer');
+                        Route::get('/cart/AddToCart/{id}', 'AddToCart')->name(
+                            'AddToCart'
+                        );
 
-                                Route::get('admin/settings/Login', function () {
-                                    return view('admin.settings.Login');
-                                })->name('settings/Login');
+                        Route::get(
+                            '/cart/RemoveToCart/{id}',
+                            'RemoveFromCart'
+                        )->name('RemoveFromCart');
 
-                                Route::get(
-                                    'admin/settings/ManageSite',
-                                    function () {
-                                        return view(
-                                            'admin.settings.ManageSite'
-                                        );
-                                    }
-                                )->name('settings/ManageSite');
+                        Route::get(
+                            '/cart/remove-quantity/{id}',
+                            'RemoveQuantity'
+                        )->name('RemoveQuantity');
 
-                                Route::get('admin/settings/Seo', function () {
-                                    return view('admin.settings.Seo');
-                                })->name('settings/Seo');
+                        Route::get(
+                            '/cart/add-quantity/{id}',
+                            'AddQuantity'
+                        )->name('AddQuantity');
+                    });
 
-                                Route::get(
-                                    'admin/settings/Stripe',
-                                    function () {
-                                        return view(
-                                            'admin.settings.StripeConfig'
-                                        );
-                                    }
-                                )->name('settings/Stripe');
+                    Route::controller(App\Http\Controllers\FavoriteController::class)->group(function () {
+                        Route::get(
+                            '/AddToFavorite/{id}',
+                            'AddToFavorite'
+                        )->name('AddToFavorite');
 
-                                /* (Settings)(End) */
-                                /* (Products)(Start) */
-                                Route::get('admin/products/', function () {
-                                    return view('admin.products.index');
-                                })->name('admin/products');
+                        Route::get(
+                            '/RemoveToFavorite/{id}',
+                            'RemoveFromFavorite'
+                        )->name('RemoveFromFavorite');
+                    });
+
+                    // if user is not logged as account redirect to home
+                    Route::middleware(App\Http\Middleware\AuthMiddleware::class)->group(function () {
+                        // if user is not admin redirect to home                 
+                        Route::middleware(App\Http\Middleware\AdminAuthenticationMiddleware::class)->group(function () {
+
+                            Route::controller(App\Http\controllers\image::class)->group(function () {
+                                Route::post('/upload/image/', 'imageup');
+                            });
+                            // adminController
+                            Route::controller(App\Http\Controllers\admin\adminController::class)->group(function () {
+                                Route::post(
+                                    '/admin/settings/ManageSite',
+                                    'EditSiteSettings'
+                                )->name('WebsiteSettings');
+                                Route::post(
+                                    '/admin/settings/Login',
+                                    'EditLoginSettings'
+                                )->name('LoginSettings');
+                                Route::post(
+                                    '/admin/settings/Smtp',
+                                    'EditSmtpSettings'
+                                )->name('SmtpSettings');
+                                Route::post(
+                                    '/admin/settings/Seo',
+                                    'EditSeoSettings'
+                                )->name('SeoSettings');
+                                Route::post(
+                                    '/admin/settings/Stripe',
+                                    'EditStripeSettings'
+                                )->name('StripeSettings');
+                                Route::post(
+                                    '/admin/settings/GoogleAdWords',
+                                    'EditGoogleAdWordsSettings'
+                                )->name('GoogleAdWordsSettings');
+                                Route::post(
+                                    '/admin/settings/GoogleLogin',
+                                    'EditGoogleLoginSettings'
+                                )->name('GoogleLoginSettings');
+
+                                Route::post(
+                                    '/admin/group/create',
+                                    'AddGroup'
+                                )->name('CreateGroup');
+                                Route::post(
+                                    '/admin/Category/create',
+                                    'AddCategory'
+                                )->name('CreateCategory');
+                                Route::post(
+                                    '/admin/products/create',
+                                    'AddProduct'
+                                )->name('CreateProduct');
+                                Route::post(
+                                    '/admin/customers/create',
+                                    'AddCustomer'
+                                )->name('CreateCustomer');
+
+                                // users
+                                Route::post(
+                                    '/admin/users/create',
+                                    'AddUsers'
+                                )->name('CreateUsers');
+                                Route::post(
+                                    '/admin/users/{email}/edit',
+                                    'EditUsers'
+                                )->name('EditUsers');
 
                                 Route::get(
                                     'admin/products/create',
-                                    function () {
-                                        return view('admin.products.add');
-                                    }
+                                    'ProductIndex'
                                 )->name('admin/products/create');
 
-                                Route::get(
-                                    'admin/products/{id}/edit',
-                                    function () {
-                                        return view('admin.products.edit');
-                                    }
-                                )->name('admin/products/edit');
-                                /* (Products)(End) */
-
-                                /* (customers)(Start) */
-                                Route::get('admin/customers/', function () {
-                                    return view('admin.customers.index');
-                                })->name('admin/customers');
+                                Route::get('admin/users/', 'UsersIndex')->name(
+                                    'admin/users'
+                                );
 
                                 Route::get(
-                                    'admin/customers/create',
-                                    function () {
-                                        return view('admin.customers.add');
-                                    }
-                                )->name('admin/customers/create');
+                                    'admin/users/create',
+                                    'AddUsersIndex'
+                                )->name('admin/users/create');
 
                                 Route::get(
-                                    'admin/customers/{id}/edit',
-                                    function () {
-                                        return view('admin.customers.edit');
-                                    }
-                                )->name('admin/customers/edit');
-                                /* (customers)(End) */
+                                    'admin/users/{id}/edit',
+                                    'EditUsersData'
+                                )->name('admin/users/edit');
 
-                                /* (users)(Start) */
-                                Route::get('admin/users/', [
-                                    App\Http\Controllers\adminController::class,
-                                    'UsersIndex',
-                                ])->name('admin/users');
+                                Route::controller(App\Http\Controllers\GroupController::class)->group(function () {
+                                    Route::get('admin/group/', 'index')->name(
+                                        'admin/group'
+                                    );
+                                });
 
-                                Route::get('admin/users/create', [
-                                    App\Http\Controllers\adminController::class,
-                                    'AddUsersIndex',
-                                ])->name('admin/users/create');
+                                Route::controller(App\Http\Controllers\categories::class)->group(function () {
+                                    Route::get(
+                                        'admin/categories/',
+                                        'index'
+                                    )->name('admin/categories');
+                                });
+                            });
 
-                                Route::get('admin/users/{id}/edit', [
-                                    App\Http\Controllers\adminController::class,
-                                    'EditUsersData',
-                                ])->name('admin/users/edit');
-                                /* (users)(End) */
+                            Route::get('admin/orders/', function () {
+                                return view('admin.orders.index');
+                            })->name('admin/orders');
 
-                                /* (orders)(Start) */
-                                Route::get('admin/orders/', function () {
-                                    return view('admin.orders.index');
-                                })->name('admin/orders');
+                            Route::get('admin/orders/create', function () {
+                                return view('admin.orders.add');
+                            })->name('admin/orders/create');
 
-                                Route::get('admin/orders/create', function () {
-                                    return view('admin.orders.add');
-                                })->name('admin/orders/create');
+                            Route::get('admin/orders/{id}/edit', function () {
+                                return view('admin.orders.edit');
+                            })->name('admin/orders/edit');
 
-                                Route::get(
-                                    'admin/orders/{id}/edit',
-                                    function () {
-                                        return view('admin.orders.edit');
-                                    }
-                                )->name('admin/orders/edit');
-                                /* (orders)(End) */
+                            Route::get('admin/group/create', function () {
+                                return view('admin.group.add');
+                            })->name('admin/group/create');
 
-                                /* (group)(Start) */
-                                Route::get('admin/group/', [
-                                    App\Http\Controllers\GroupController::class,
-                                    'index',
-                                ])->name('admin/group');
+                            Route::get('admin/group/{id}/edit', function () {
+                                return view('admin.group.edit');
+                            })->name('admin/group/edit');
 
-                                Route::get('admin/group/create', function () {
-                                    return view('admin.group.add');
-                                })->name('admin/group/create');
+                            Route::get('admin/categories/create', function () {
+                                return view('admin.categories.add');
+                            })->name('admin/categories/create');
 
-                                Route::get(
-                                    'admin/group/{id}/edit',
-                                    function () {
-                                        return view('admin.group.edit');
-                                    }
-                                )->name('admin/group/edit');
-                                /* (group)(End) */
+                            Route::get(
+                                'admin/categories/{id}/edit',
+                                function () {
+                                    return view('admin.categories.edit');
+                                }
+                            )->name('admin/categories/edit');
 
-                                /* (categories)(Start) */
-                                Route::get('admin/categories/', [
-                                    App\Http\Controllers\categories::class,
-                                    'index',
-                                ])->name('admin/categories');
+                            Route::get(
+                                'admin/customers/{id}/edit',
+                                function () {
+                                    return view('admin.customers.edit');
+                                }
+                            )->name('admin/customers/edit');
 
-                                Route::get(
-                                    'admin/categories/create',
-                                    function () {
-                                        return view('admin.categories.add');
-                                    }
-                                )->name('admin/categories/create');
+                            Route::get('admin/customers/', function () {
+                                return view('admin.customers.index');
+                            })->name('admin/customers');
 
-                                Route::get(
-                                    'admin/categories/{id}/edit',
-                                    function () {
-                                        return view('admin.categories.edit');
-                                    }
-                                )->name('admin/categories/edit');
-                                /* (categories)(End) */
-                            }
-                        );
+                            Route::get('admin/customers/create', function () {
+                                return view('admin.customers.add');
+                            })->name('admin/customers/create');
 
-                        // Footer
-                        Route::post('NewsLetter', [
-                            App\Http\Controllers\NewsLetter::class,
-                            'ValidateNewsLetter',
-                        ])->name('NewsLetter');
-                    }
-                );
+                            Route::get('admin/products/{id}/edit', function () {
+                                return view('admin.products.edit');
+                            })->name('admin/products/edit');
+
+                            Route::get('admin/products/', function () {
+                                return view('admin.products.index');
+                            })->name('admin/products');
+
+                            Route::view(
+                                'admin/settings/ManageSite',
+                                'admin.settings.ManageSite'
+                            )->name('settings/ManageSite');
+
+                            Route::view(
+                                'admin/settings/Seo',
+                                'admin.settings.Seo'
+                            )->name('settings/Seo');
+
+                            Route::view(
+                                'admin/settings/Stripe',
+                                'admin.settings.StripeConfig'
+                            )->name('settings/Stripe');
+
+                            Route::view(
+                                'admin/settings/Advertising',
+                                'admin.settings.AdvertisingConfiguration'
+                            )->name('settings/Advertising');
+
+                            Route::view(
+                                'admin/settings/GoogleLogin',
+                                'admin.settings.configGoogleLogin'
+                            )->name('settings/GoogleLogin');
+
+                            Route::view(
+                                'admin/settings/Social',
+                                'admin.settings.configSocialLink'
+                            )->name('settings/Social');
+
+                            Route::view(
+                                'admin/settings/EditSettings',
+                                'admin.settings.EditSettings'
+                            )->name('EditSettings');
+
+                            Route::view(
+                                'admin/settings/EmailServer',
+                                'admin.settings.EmailServerConfiguration'
+                            )->name('settings/EmailServer');
+
+                            Route::view(
+                                'admin/settings/Login',
+                                'admin.settings.Login'
+                            )->name('settings/Login');
+                        });
+                        /* (adminController) */
+
+                        //  (CustomerController)
+                        Route::controller(App\Http\Controllers\CustomerController::class)->group(function () {
+                            Route::post('/ChangeEmail', 'ChangeEmail')->name(
+                                'ChangeEmail'
+                            );
+
+                            Route::get('/account', 'account')->name('account');
+
+                            Route::post(
+                                '/account/ChangePassword',
+                                'ChangePassword'
+                            )->name('ChangePassword');
+
+                            Route::post(
+                                'SendVerificationCode2fa',
+                                'SendVerificationCode2fa'
+                            )->name('SendVerificationCode2fa');
+
+                            Route::post('Activate2fa', 'Activate2fa')->name(
+                                'Activate2fa'
+                            );
+
+                            Route::get(
+                                '/account/history/shopping',
+                                'order'
+                            )->name('order');
+                            Route::get(
+                                '/account/order/tracking/{id}',
+                                'orderDetalis'
+                            )->name('OrderDetalis');
+
+                            Route::post(
+                                '/ActionSafeSetings',
+                                'ActionSafeSetings'
+                            )->name('ActionSafeSetings');
+                        });
+                        //  (CustomerController)
+
+                        //  (DeliveryAddressesController)
+                        Route::controller(App\Http\Controllers\DeliveryAddressesController::class)->group(function () {
+                            Route::get(
+                                '/DeleteAdress/{address_id}',
+                                'DeleteAddress'
+                            )->name('DeleteAddress');
+
+                            Route::get(
+                                '/EditAddress/{id}',
+                                'AddressData'
+                            )->name('EditAdress');
+
+                            Route::post('/EditAddress}', 'EditAddress')->name(
+                                'EditAddress'
+                            );
+
+                            Route::get('/DeliveryAddresses', 'index')->name(
+                                'DeliveryAddresses'
+                            );
+                            Route::post(
+                                '/DeliveryAddresses',
+                                'addAdresses'
+                            )->name('addAdress');
+                        });
+                        //  (DeliveryAddressesController)
+
+                        //  (Coupons)
+                        Route::controller(App\Http\Controllers\Coupons::class)->group(function () {
+                            Route::post('/PaymentCupon', 'ValidateCupon');
+                            Route::get('/PaymentCuponClose', 'UnSetCupon');
+                        });
+                        //  (Coupons)
+
+                        //  (Checkout)
+                        Route::controller(App\Http\Controllers\Checkout::class)->group(function () {
+                            Route::post('/AddDelivery', 'store')->name(
+                                'AddDelivery'
+                            );
+                            Route::get('/payment', 'CheckOut')->name(
+                                'Checkout'
+                            );
+
+                            Route::get('/AddDelivery', function () {
+                                return redirect('/');
+                            });
+                        });
+                        //  (Checkout)
+
+                        //  (NewsLetter)
+                        Route::controller(App\Http\Controllers\NewsLetter::class)->group(function () {
+                            Route::post(
+                                'NewsLetter',
+                                'ValidateNewsLetter'
+                            )->name('NewsLetter');
+                        });
+
+                        //  (UserNotificationController)
+                        Route::controller(App\Http\Controllers\UserNotificationController::class)->group(function () {
+                            Route::get('/Subscriptions', 'index')->name(
+                                'Subscriptions'
+                            );
+
+                            Route::post(
+                                '/NotificationSettings',
+                                'EditNotificationSettings'
+                            )->name('NotificationSettings');
+                        });
+                        //  (UserNotificationController)
+
+                        Route::get('/AddAddress', function () {
+                            return view('account.address.AddAdress');
+                        })->name('AddAdress');
+
+                        Route::get('/SecuritySettings', function () {
+                            return view('account.settings.SecuritySettings');
+                        })->name('SecuritySettings');
+
+                        Route::get('/Returns', function () {
+                            return view('account.Returns');
+                        })->name('Returns');
+
+                        Route::get('/Reviews', function () {
+                            return view('account.Reviews');
+                        })->name('Reviews');
+
+                        Route::get('/Guarantees', function () {
+                            return view('account.Guarantees');
+                        })->name('Guarantees');
+
+                        Route::get('/PremiumMembership', function () {
+                            return view('account.PremiumMembership');
+                        })->name('PremiumMembership');
+
+                        Route::get('/VouchersGiftCards', function () {
+                            return view('account.VouchersGiftCards');
+                        })->name('VouchersGiftCards');
+
+                        Route::get('/Cards', function () {
+                            return view('account.Cards');
+                        })->name('Cards');
+
+                        Route::get('/Service', function () {
+                            return view('account.Service');
+                        })->name('Service');
+                    });
+                    
+                    //  (ConatctController)
+                    Route::controller(App\Http\Controllers\ConatctController::class)->group(function () {
+                        Route::post('/ContactSent', 'store');
+                        Route::view('/contact', 'contact-us')->name('contact');
+                    });
+                    //  (ConatctController)
+
+                    Route::view('/faq', 'faq')->name('faq');
+                    Route::view('aboutUs', 'about-us');
+                });
             }
         );
     }

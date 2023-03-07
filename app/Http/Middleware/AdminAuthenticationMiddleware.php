@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Http\Controllers\adminController;
+use App\Http\Controllers\admin\adminController;
 
 class AdminAuthenticationMiddleware extends adminController
 {

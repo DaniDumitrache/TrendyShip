@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Exceptions;
-
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Contracts\Http\Kernel;
 
 class Handler extends ExceptionHandler
 {
@@ -46,5 +46,7 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+        
+        return view()->share('website_config',  app(Kernel::class)->prependMiddleware(\App\Http\Middleware\WebsiteConfigMiddleware::class));
     }
 }

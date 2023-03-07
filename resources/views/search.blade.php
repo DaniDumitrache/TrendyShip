@@ -153,7 +153,8 @@
                                             <div class="list_product_img">
                                                 <div class="lp_img">
                                                     <a href="product-view.html">
-                                                        <img loading="lazy" src="assets/images/headphone-2.png"
+                                                        <img loading="lazy"
+                                                            src="{{ route('ProductImage', $product->MainImage) }}"
                                                             alt="product">
                                                     </a>
                                                 </div>
@@ -167,10 +168,10 @@
                                                 <div class="ratprice">
                                                     <div class="price">
                                                         <span
-                                                            class="org_price">{{ $product->price * ($product->Discount / 100) }}</span>
-                                                        <span class="prev_price">{{ $product->price }}</span>
+                                                            class="org_price">{{ $product->price * ($product->Discount / 100) }} RON</span>
+                                                        <span class="prev_price">{{ $product->price }} RON</span>
                                                     </div>
-                                                    <div class="rating">
+                                                    {{-- <div class="rating">
                                                         <div class="d-flex align-items-center justify-content-start">
                                                             <div class="rating_star">
                                                                 <span><i class="las la-star"></i></span>
@@ -181,14 +182,15 @@
                                                             </div>
                                                             <p class="rating_count">(150)</p>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                                 <p class="product_list_desc">{{ $product->description }}</p>
                                                 <div class="product_list_btns">
-                                                    <a href="/AddToCart/{{ $product->id }}" class="list_product_btn">
+                                                    <a href="{{ route('AddToCart', $product->id) }}"
+                                                        class="list_product_btn">
                                                         <button class="list_product_btn"><span class="icon"><i
                                                                     class="icon-cart"></i></span> Add to Cart</button></a>
-                                                    <a href="/AddToWishList/{{ $product->id }}" class="list_product_btn">
+                                                    <a href="{{route('AddToFavorite',$product->id) }}" class="list_product_btn">
                                                         <button class="list_product_btn"><span class="icon"><i
                                                                     class="icon-cart"></i></span> Wishlist</button></a>
                                                 </div>
